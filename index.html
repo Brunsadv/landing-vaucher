@@ -22,7 +22,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.min.js"></script>
   
   <style>
     :root {
@@ -911,16 +911,13 @@
               </div>
             </a>
 
-            <a 
-              href="mailto:atendimento@vaucherealvares.com"
-              class="flex items-start gap-4 group"
-            >
+            <a href="mailto:atendimento@vaucherealvares.com" class="flex items-start gap-4 group">
               <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--color-primary)] transition-colors">
                 <i data-lucide="mail" class="w-6 h-6 text-white"></i>
               </div>
               <div>
                 <div class="font-medium text-white mb-1">E-mail</div>
-                <div class="text-white/60"><span class="__cf_email__" data-cfemail="accdd8c9c2c8c5c1c9c2d8c3ecdacdd9cfc4c9dec9cdc0dacddec9df82cfc3c1">[email&#160;protected]</span></div>
+                <div class="text-white/60">atendimento@vaucherealvares.com</div>
               </div>
             </a>
           </div>
@@ -1016,9 +1013,21 @@
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Initialize Lucide icons
-    lucide.createIcons();
+  <script>
+    // Wait for DOM to load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Lucide icons
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    });
+    
+    // Fallback - try again after window load
+    window.addEventListener('load', function() {
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    });
 
     // Header scroll effect
     const header = document.getElementById('header');
@@ -1078,6 +1087,4 @@
     });
 
     // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.pr
+    document
