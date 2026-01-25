@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights | Vaucher e Álvares Advocacia</title>
+  <meta name="description" content="Notícias, artigos jurídicos, jurisprudência e alertas de golpes. Mantenha-se informado com o escritório Vaucher e Álvares.">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #8B1538;
+      --primary-light: #a91d47;
+      --primary-dark: #6d1029;
+      --bg: #ffffff;
+      --bg-subtle: #f8f8f8;
+      --bg-card: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #666666;
+      --text-subtle: #999999;
+      --border: #e5e5e5;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --shadow-hover: rgba(139, 21, 56, 0.15);
+      --warning: #f59e0b;
+      --warning-bg: #fef3c7;
+      --info: #3b82f6;
+      --info-bg: #dbeafe;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Logo watermark */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      max-width: 600px;
+      height: 300px;
+      background: url('logo-final.jpg') center center no-repeat;
+      background-size: contain;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 10px var(--shadow);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .nav-logo span {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+      background: rgba(139, 21, 56, 0.05);
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: white;
+      padding: 0.6rem 1.25rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-left: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    /* Language Selector */
+    .lang-selector {
+      display: flex;
+      gap: 0.25rem;
+      margin-left: 0.75rem;
+      background: var(--bg-subtle);
+      border-radius: 8px;
+      padding: 0.25rem;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .lang-btn:hover {
+      color: var(--text);
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .nav-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-menu-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 99;
+      padding: 5rem 2rem 2rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.25rem;
+      padding: 1rem;
+      border-radius: 12px;
+      transition: background 0.2s ease;
+    }
+
+    .mobile-menu a:hover {
+      background: rgba(139, 21, 56, 0.05);
+    }
+
+    .mobile-lang-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+
+    .mobile-lang-selector .lang-btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .page-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Category Tabs */
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .category-tab {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .category-tab:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .category-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    /* Alert Banner */
+    .alert-banner {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .alert-card {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 2px solid var(--warning);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .alert-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--warning);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .alert-icon svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .alert-content {
+      flex: 1;
+    }
+
+    .alert-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #92400e;
+      margin-bottom: 0.5rem;
+    }
+
+    .alert-text {
+      color: #a16207;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .alert-btn {
+      background: var(--warning);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .alert-btn:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+    }
+
+    /* Articles Section */
+    .articles-section {
+      padding: 2rem 2rem 6rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .articles-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .section-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: gap 0.2s ease;
+    }
+
+    .section-link:hover {
+      gap: 0.75rem;
+    }
+
+    .section-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Articles Grid */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .article-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px var(--shadow-hover);
+    }
+
+    .article-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--border) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .article-image-placeholder {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(139, 21, 56, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+
+    .article-image-placeholder svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .article-category {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .article-category.jurisprudencia {
+      background: var(--info);
+    }
+
+    .article-category.alerta {
+      background: var(--warning);
+    }
+
+    .article-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article-date {
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      margin-bottom: 0.75rem;
+    }
+
+    .article-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .article-excerpt {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    .article-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .article-link svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s ease;
+    }
+
+    .article-card:hover .article-link svg {
+      transform: translateX(4px);
+    }
+
+    /* Featured Article */
+    .featured-article {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .featured-article .article-image {
+      height: 100%;
+      min-height: 350px;
+      border-radius: 20px 0 0 20px;
+    }
+
+    .featured-article .article-content {
+      padding: 2.5rem;
+      justify-content: center;
+    }
+
+    .featured-article .article-title {
+      font-size: 1.75rem;
+    }
+
+    .featured-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(139, 21, 56, 0.1);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .featured-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Jurisprudence Section */
+    .jurisprudence-section {
+      padding: 6rem 2rem;
+      background: var(--bg-subtle);
+      position: relative;
+      z-index: 1;
+    }
+
+    .jurisprudence-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .jurisprudence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .jurisprudence-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .jurisprudence-card:hover {
+      border-color: var(--info);
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+
+    .jurisprudence-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .jurisprudence-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--info-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--info);
+      flex-shrink: 0;
+    }
+
+    .jurisprudence-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .jurisprudence-meta {
+      flex: 1;
+    }
+
+    .jurisprudence-court {
+      font-size: 0.8rem;
+      color: var(--info);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .jurisprudence-number {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .jurisprudence-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 0.75rem;
+    }
+
+    .jurisprudence-excerpt {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      padding: 6rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .newsletter-container {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .newsletter-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color 0.2s ease;
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .newsletter-btn {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .newsletter-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+      background: var(--bg-subtle);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-info {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    .footer-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .footer-copy {
+      color: var(--text-subtle);
+      font-size: 0.8rem;
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta, .lang-selector {
+        display: none;
+      }
+
+      .nav-menu-btn {
+        display: block;
+      }
+
+      .page-header {
+        padding: 7rem 1.5rem 3rem;
+      }
+
+      .category-tabs {
+        padding: 0 1.5rem;
+        gap: 0.5rem;
+      }
+
+      .category-tab {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      .alert-banner {
+        padding: 0 1.5rem;
+      }
+
+      .alert-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+      }
+
+      .alert-btn {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .articles-section {
+        padding: 2rem 1.5rem 4rem;
+      }
+
+      .articles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-article {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-article .article-image {
+        min-height: 200px;
+        border-radius: 20px 20px 0 0;
+      }
+
+      .section-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+
+      .jurisprudence-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .jurisprudence-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .newsletter-btn {
+        width: 100%;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-info {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-icon.png" alt="Vaucher e Álvares">
+      <span>Vaucher e Álvares</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="areas.html" class="nav-link" data-i18n="nav.areas">Áreas de Atuação</a>
+      <a href="equipe.html" class="nav-link" data-i18n="nav.team">Equipe</a>
+      <a href="insights.html" class="nav-link active" data-i18n="nav.insights">Insights</a>
+      <a href="diferenciais.html" class="nav-link" data-i18n="nav.differentials">Diferenciais</a>
+      <a href="contato.html" class="nav-link" data-i18n="nav.contact">Contato</a>
+    </div>
+
+    <a href="https://appcliente.vaucherealvares.com" target="_blank" class="nav-cta" data-i18n="nav.portal">Portal do Cliente</a>
+
+    <!-- Language Selector -->
+    <div class="lang-selector">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-i18n="nav.home">Início</a>
+    <a href="areas.html" data-i18n="nav.areas">Áreas de Atuação</a>
+    <a href="equipe.html" data-i18n="nav.team">Equipe</a>
+    <a href="insights.html" data-i18n="nav.insights">Insights</a>
+    <a href="diferenciais.html" data-i18n="nav.differentials">Diferenciais</a>
+    <a href="contato.html" data-i18n="nav.contact">Contato</a>
+    <a href="https://appcliente.vaucherealvares.com" target="_blank" data-i18n="nav.portal">Portal do Cliente</a>
+    <div class="mobile-lang-selector">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+  </div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p class="page-label" data-i18n="insights.pageLabel">Conhecimento Jurídico</p>
+    <h1 class="page-title" data-i18n="insights.pageTitle">Notícias & Artigos</h1>
+    <p class="page-desc" data-i18n="insights.pageDesc">Mantenha-se informado com artigos, análises jurídicas, jurisprudência atualizada e alertas importantes sobre golpes e fraudes.</p>
+  </header>
+
+  <!-- Category Tabs -->
+  <div class="category-tabs">
+    <button class="category-tab active" data-category="all" data-i18n="insights.all">Todos</button>
+    <button class="category-tab" data-category="artigos" data-i18n="insights.articles">Artigos</button>
+    <button class="category-tab" data-category="jurisprudencia" data-i18n="insights.jurisprudence">Jurisprudência</button>
+    <button class="category-tab" data-category="alertas" data-i18n="insights.alerts">Alertas de Golpe</button>
+    <button class="category-tab" data-category="noticias" data-i18n="insights.news">Notícias</button>
+  </div>
+
+  <!-- Alert Banner -->
+  <div class="alert-banner animate-on-scroll" id="alert-banner">
+    <div class="alert-card">
+      <div class="alert-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <div class="alert-content">
+        <h3 class="alert-title" data-i18n="insights.alertTitle">Atenção: Golpe do Falso Advogado</h3>
+        <p class="alert-text" data-i18n="insights.alertText">Criminosos estão se passando por advogados e solicitando depósitos em contas pessoais. Nosso escritório NUNCA solicita pagamentos por WhatsApp. Em caso de dúvida, entre em contato pelos canais oficiais.</p>
+      </div>
+      <a href="#alertas" class="alert-btn" data-i18n="insights.alertBtn">Saiba mais</a>
+    </div>
+  </div>
+
+  <!-- Articles Section -->
+  <section class="articles-section">
+    <div class="articles-container">
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title" data-i18n="insights.recentArticles">Artigos Recentes</h2>
+        <a href="#" class="section-link">
+          <span data-i18n="insights.viewAll">Ver todos</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="articles-grid" id="featured-articles">
+        <!-- Featured Article -->
+        <article class="article-card featured-article animate-on-scroll">
+          <div class="article-image">
+            <div class="article-image-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <span class="article-category">Destaque</span>
+          </div>
+          <div class="article-content">
+            <span class="featured-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <span data-i18n="insights.featured">Em destaque</span>
+            </span>
+            <span class="article-date">20 de Janeiro de 2026</span>
+            <h3 class="article-title">Reforma Trabalhista 2026: Principais Mudanças e Impactos para Servidores Públicos</h3>
+            <p class="article-excerpt">Análise completa das novas disposições legais que entram em vigor este ano e como elas afetam os direitos dos servidores públicos estaduais e municipais. Entenda as mudanças no regime de trabalho, aposentadoria e benefícios.</p>
+            <span class="article-link">
+              <span data-i18n="insights.readMore">Ler artigo completo</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+
+        <!-- Regular Articles -->
+        <article class="article-card animate-on-scroll">
+          <div class="article-image">
+            <div class="article-image-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <span class="article-category">Sindical</span>
+          </div>
+          <div class="article-content">
+            <span class="article-date">18 de Janeiro de 2026</span>
+            <h3 class="article-title">Negociação Coletiva: Estratégias para Acordos Mais Favoráveis</h3>
+            <p class="article-excerpt">Conheça as técnicas mais eficazes para conduzir negociações coletivas e alcançar acordos que beneficiem toda a categoria.</p>
+            <span class="article-link">
+              <span data-i18n="insights.readMore">Ler artigo completo</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card animate-on-scroll">
+          <div class="article-image">
+            <div class="article-image-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <span class="article-category alerta">Alerta</span>
+          </div>
+          <div class="article-content">
+            <span class="article-date">15 de Janeiro de 2026</span>
+            <h3 class="article-title">Golpe do Precatório: Como Identificar e Se Proteger</h3>
+            <p class="article-excerpt">Saiba como golpistas estão usando falsas promessas de liberação de precatórios para enganar beneficiários.</p>
+            <span class="article-link">
+              <span data-i18n="insights.readMore">Ler artigo completo</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card animate-on-scroll">
+          <div class="article-image">
+            <div class="article-image-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </div>
+            <span class="article-category">Trabalhista</span>
+          </div>
+          <div class="article-content">
+            <span class="article-date">12 de Janeiro de 2026</span>
+            <h3 class="article-title">Direitos do Trabalhador em Home Office: Perguntas Frequentes</h3>
+            <p class="article-excerpt">Respondemos as principais dúvidas sobre direitos trabalhistas no regime de trabalho remoto.</p>
+            <span class="article-link">
+              <span data-i18n="insights.readMore">Ler artigo completo</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card animate-on-scroll">
+          <div class="article-image">
+            <div class="article-image-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <span class="article-category">Previdenciário</span>
+          </div>
+          <div class="article-content">
+            <span class="article-date">10 de Janeiro de 2026</span>
+            <h3 class="article-title">Aposentadoria Especial: Quem Tem Direito e Como Solicitar</h3>
+            <p class="article-excerpt">Guia completo sobre aposentadoria especial para profissionais expostos a agentes nocivos.</p>
+            <span class="article-link">
+              <span data-i18n="insights.readMore">Ler artigo completo</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jurisprudence Section -->
+  <section class="jurisprudence-section" id="jurisprudencia">
+    <div class="jurisprudence-container">
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title" data-i18n="insights.recentJurisprudence">Jurisprudência Recente</h2>
+        <a href="#" class="section-link">
+          <span data-i18n="insights.viewAll">Ver todos</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="jurisprudence-grid">
+        <a href="#" class="jurisprudence-card animate-on-scroll">
+          <div class="jurisprudence-header">
+            <div class="jurisprudence-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                <line x1="15" y1="9" x2="15.01" y2="9"/>
+              </svg>
+            </div>
+            <div class="jurisprudence-meta">
+              <span class="jurisprudence-court">STF</span>
+              <span class="jurisprudence-number">RE 1.234.567/MT</span>
+            </div>
+          </div>
+          <h3 class="jurisprudence-title">Servidor público tem direito a incorporação de gratificação após 5 anos</h3>
+          <p class="jurisprudence-excerpt">Decisão reconhece o direito à incorporação de gratificação de função recebida por mais de 5 anos consecutivos.</p>
+        </a>
+
+        <a href="#" class="jurisprudence-card animate-on-scroll">
+          <div class="jurisprudence-header">
+            <div class="jurisprudence-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                <line x1="15" y1="9" x2="15.01" y2="9"/>
+              </svg>
+            </div>
+            <div class="jurisprudence-meta">
+              <span class="jurisprudence-court">TST</span>
+              <span class="jurisprudence-number">RR 789.012/MT</span>
+            </div>
+          </div>
+          <h3 class="jurisprudence-title">Horas extras de bancário devem considerar tempo de deslocamento</h3>
+          <p class="jurisprudence-excerpt">Tribunal decide que tempo de deslocamento em veículo da empresa integra a jornada de trabalho.</p>
+        </a>
+
+        <a href="#" class="jurisprudence-card animate-on-scroll">
+          <div class="jurisprudence-header">
+            <div class="jurisprudence-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                <line x1="15" y1="9" x2="15.01" y2="9"/>
+              </svg>
+            </div>
+            <div class="jurisprudence-meta">
+              <span class="jurisprudence-court">TRT-23</span>
+              <span class="jurisprudence-number">ROT 456.789/MT</span>
+            </div>
+          </div>
+          <h3 class="jurisprudence-title">Sindicato pode atuar como substituto processual em ação coletiva</h3>
+          <p class="jurisprudence-excerpt">Reconhecida a legitimidade do sindicato para defender direitos individuais homogêneos dos trabalhadores.</p>
+        </a>
+
+        <a href="#" class="jurisprudence-card animate-on-scroll">
+          <div class="jurisprudence-header">
+            <div class="jurisprudence-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                <line x1="15" y1="9" x2="15.01" y2="9"/>
+              </svg>
+            </div>
+            <div class="jurisprudence-meta">
+              <span class="jurisprudence-court">STJ</span>
+              <span class="jurisprudence-number">REsp 2.345.678/MT</span>
+            </div>
+          </div>
+          <h3 class="jurisprudence-title">Prescrição de ação contra a Fazenda Pública é de 5 anos</h3>
+          <p class="jurisprudence-excerpt">Confirmado o prazo prescricional quinquenal para ações de cobrança contra entes públicos.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="newsletter-container animate-on-scroll">
+      <p class="page-label" data-i18n="insights.newsletterLabel">Newsletter</p>
+      <h2 class="newsletter-title" data-i18n="insights.newsletterTitle">Receba nossos conteúdos</h2>
+      <p class="newsletter-desc" data-i18n="insights.newsletterDesc">Cadastre-se para receber artigos, jurisprudência e alertas importantes diretamente no seu e-mail.</p>
+
+      <form class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Seu melhor e-mail" data-i18n-placeholder="insights.emailPlaceholder" required>
+        <button type="submit" class="newsletter-btn" data-i18n="insights.subscribe">Inscrever-se</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="tel:+556530251223" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          (65) 3025-1223
+        </a>
+        <a href="mailto:atendimento@vaucherealvares.com" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          atendimento@vaucherealvares.com
+        </a>
+      </div>
+      <p class="footer-copy" data-i18n="footer.copy">© 2026 Vaucher e Álvares Advogados. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- i18n Script -->
+  <script src="i18n.js"></script>
+
+  <!-- Insights API Integration -->
+  <script src="insights-api.js"></script>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      const isOpen = mobileMenu.classList.contains('active');
+      menuBtn.innerHTML = isOpen
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        menuBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      });
+    });
+
+    // Category tabs functionality
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    categoryTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        categoryTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        // Here you would filter articles based on category
+        // For now, it just changes the active tab
+      });
+    });
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Newsletter form
+    document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = e.target.querySelector('input').value;
+      alert('Obrigado por se inscrever! Você receberá nossos conteúdos em: ' + email);
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

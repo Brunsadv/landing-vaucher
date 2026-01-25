@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Áreas de Atuação | Vaucher e Álvares Advocacia</title>
+  <meta name="description" content="Conheça nossas áreas de atuação: Direito Sindical, Trabalhista, Administrativo, Penal, Tributário, Previdenciário, Coletivo e do Consumidor.">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #8B1538;
+      --primary-light: #a91d47;
+      --primary-dark: #6d1029;
+      --bg: #ffffff;
+      --bg-subtle: #f8f8f8;
+      --bg-card: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #666666;
+      --text-subtle: #999999;
+      --border: #e5e5e5;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --shadow-hover: rgba(139, 21, 56, 0.15);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Logo watermark esmaecida no fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      max-width: 600px;
+      height: 300px;
+      background: url('logo-final.jpg') center center no-repeat;
+      background-size: contain;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .nav-logo span {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary);
+      background: rgba(139, 21, 56, 0.05);
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: white;
+      padding: 0.6rem 1.25rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-left: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    /* Language Selector */
+    .lang-selector {
+      display: flex;
+      gap: 0.25rem;
+      margin-left: 0.75rem;
+      background: var(--bg-subtle);
+      border-radius: 8px;
+      padding: 0.25rem;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .lang-btn:hover {
+      color: var(--text);
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .nav-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-menu-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 99;
+      padding: 5rem 2rem 2rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.25rem;
+      padding: 1rem;
+      border-radius: 12px;
+      transition: background 0.2s ease;
+    }
+
+    .mobile-menu a:hover {
+      background: rgba(139, 21, 56, 0.05);
+    }
+
+    .mobile-lang-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+
+    .mobile-lang-selector .lang-btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .page-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Areas Section */
+    .areas-section {
+      padding: 4rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .areas-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .area-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+      scroll-margin-top: 100px;
+    }
+
+    .area-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 10px 40px var(--shadow);
+    }
+
+    .area-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .area-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1), -2px -2px 8px rgba(255, 255, 255, 0.9);
+      transition: all 0.2s ease;
+    }
+
+    .area-card:hover .area-icon {
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.12), -1px -1px 4px rgba(255, 255, 255, 0.8);
+      transform: scale(0.98);
+    }
+
+    .area-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .area-icon img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .area-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .area-content {
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .area-content p {
+      margin-bottom: 1rem;
+    }
+
+    .area-content ul {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+
+    .area-content li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .area-content li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 6px;
+      height: 6px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    .area-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.875rem 1.75rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 1.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .area-cta:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--shadow-hover);
+    }
+
+    .area-cta svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 6rem 2rem;
+      position: relative;
+      z-index: 1;
+      background: var(--bg-subtle);
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .cta-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn.primary {
+      background: var(--primary);
+      color: white;
+      border: 2px solid var(--primary);
+    }
+
+    .cta-btn.primary:hover {
+      background: var(--primary-light);
+      border-color: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--shadow-hover);
+    }
+
+    .cta-btn.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+
+    .cta-btn.secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .cta-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+      background: var(--bg);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-info {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    .footer-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .footer-copy {
+      color: var(--text-subtle);
+      font-size: 0.8rem;
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta, .lang-selector {
+        display: none;
+      }
+
+      .nav-menu-btn {
+        display: block;
+      }
+
+      .page-header {
+        padding: 7rem 1.5rem 3rem;
+      }
+
+      .areas-section {
+        padding: 2rem 1.5rem;
+      }
+
+      .area-card {
+        padding: 2rem;
+      }
+
+      .area-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cta {
+        padding: 4rem 1.5rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-info {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-icon.png" alt="Vaucher e Álvares">
+      <span>Vaucher e Álvares</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="areas.html" class="nav-link active" data-i18n="nav.areas">Áreas de Atuação</a>
+      <a href="equipe.html" class="nav-link" data-i18n="nav.team">Equipe</a>
+      <a href="diferenciais.html" class="nav-link" data-i18n="nav.differentials">Diferenciais</a>
+      <a href="insights.html" class="nav-link" data-i18n="nav.insights">Insights</a>
+      <a href="contato.html" class="nav-link" data-i18n="nav.contact">Contato</a>
+    </div>
+
+    <a href="https://appcliente.vaucherealvares.com" target="_blank" class="nav-cta" data-i18n="nav.portal">Portal do Cliente</a>
+
+    <!-- Language Selector -->
+    <div class="lang-selector">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-i18n="nav.home">Início</a>
+    <a href="areas.html" data-i18n="nav.areas">Áreas de Atuação</a>
+    <a href="equipe.html" data-i18n="nav.team">Equipe</a>
+    <a href="diferenciais.html" data-i18n="nav.differentials">Diferenciais</a>
+    <a href="insights.html" data-i18n="nav.insights">Insights</a>
+    <a href="contato.html" data-i18n="nav.contact">Contato</a>
+    <a href="https://appcliente.vaucherealvares.com" target="_blank" data-i18n="nav.portal">Portal do Cliente</a>
+    <!-- Mobile Language Selector -->
+    <div class="mobile-lang-selector">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+  </div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p class="page-label" data-i18n="areas.pageLabel">Expertise Jurídica</p>
+    <h1 class="page-title" data-i18n="areas.pageTitle">Áreas de Atuação</h1>
+    <p class="page-desc" data-i18n="areas.pageDesc">Atuamos em diversas áreas do Direito, oferecendo soluções jurídicas personalizadas para cada cliente com excelência e comprometimento.</p>
+  </header>
+
+  <!-- Areas Section -->
+  <section class="areas-section">
+    <div class="areas-container">
+
+      <!-- Sindical -->
+      <article class="area-card animate-on-scroll" id="sindical">
+        <div class="area-header">
+          <div class="area-icon">
+            <img src="Sindical.jpg" alt="Direito Sindical">
+          </div>
+          <h2 class="area-title">Direito Sindical</h2>
+        </div>
+        <div class="area-content">
+          <p>Assessoria jurídica completa para sindicatos, federações e confederações em todo o território nacional. Nossa equipe possui vasta experiência em questões sindicais, representando entidades em negociações coletivas e dissídios.</p>
+          <ul>
+            <li>Negociações coletivas e acordos sindicais</li>
+            <li>Dissídios coletivos perante tribunais trabalhistas</li>
+            <li>Assessoria em eleições sindicais</li>
+            <li>Enquadramento sindical</li>
+            <li>Consultoria em contribuições sindicais</li>
+            <li>Ações de cumprimento de convenções coletivas</li>
+          </ul>
+          <a href="https://wa.me/556599478584?text=Olá! Gostaria de uma consulta sobre Direito Sindical." target="_blank" class="area-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Consultar via WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <!-- Trabalhista -->
+      <article class="area-card animate-on-scroll" id="trabalhista">
+        <div class="area-header">
+          <div class="area-icon">
+            <img src="Trabalhista.jpg" alt="Direito Trabalhista">
+          </div>
+          <h2 class="area-title">Direito Trabalhista</h2>
+        </div>
+        <div class="area-content">
+          <p>Representação de trabalhadores em todas as demandas trabalhistas, desde a consultoria preventiva até a atuação contenciosa em todas as instâncias da Justiça do Trabalho.</p>
+          <ul>
+            <li>Reclamações trabalhistas</li>
+            <li>Rescisão indireta do contrato de trabalho</li>
+            <li>Horas extras, adicional noturno e insalubridade</li>
+            <li>Assédio moral e sexual no trabalho</li>
+            <li>Acidentes de trabalho e doenças ocupacionais</li>
+            <li>Reintegração e estabilidade</li>
+          </ul>
+          <a href="https://wa.me/556599478584?text=Olá! Gostaria de uma consulta sobre Direito Trabalhista." target="_blank" class="area-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Consultar via WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <!-- Administrativo -->
+      <article class="area-card animate-on-scroll" id="administrativo">
+        <div class="area-header">
+          <div class="area-icon">
+            <img src="Administrativo.jpg" alt="Direito Administrativo">
+          </div>
+          <h2 class="area-title">Direito Administrativo</h2>
+        </div>
+        <div class="area-content">
+          <p>Atuação especializada em questões envolvendo a Administração Pública, servidores públicos e licitações. Defendemos os direitos dos servidores e assessoramos em procedimentos administrativos.</p>
+          <ul>
+            <li>Concursos públicos e nomeação</li>
+            <li>Processos administrativos disciplinares</li>
+            <li>Progressão funcional e promoções</li>
+            <li>Aposentadoria de servidor público</li>
+            <li>Licitações e contratos administrativos</li>
+            <li>Responsabilidade civil do Estado</li>
+          </ul>
+          <a href="https://wa.me/556599478584?text=Olá! Gostaria de uma consulta sobre Direito Administrativo." target="_blank" class="area-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Consultar via WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <!-- Penal -->
+      <article class="area-card animate-on-scroll" id="penal">
+        <div class="area-header">
+          <div class="area-icon">
+            <img src="Penal.jpg" alt="Direito Penal">
+          </div>
+          <h2 class="area-title">Direito Penal</h2>
+        </div>
+        <div class="area-content">
+          <p>Defesa criminal em todas as fases do processo penal, desde o inquérito policial até recursos aos tribunais superiores. Atuação firme e técnica na defesa dos direitos do acusado.</p>
+          <ul>
+            <li>Acompanhamento de inquéritos policiais</li>
+            <li>Defesa em ações penais</li>
+            <li>Habeas Corpus e liberdade provisória</li>
+            <li>Recursos criminais</li>
+            <li>Execução penal e progressão de regime</li>
+            <li>Crimes contra a honra</li>
+          </ul>
+          <a href="https://wa.me/556599478584?text=Olá! Gostaria de uma consulta sobre Direito Penal." target="_blank" class="area-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Consultar via WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <!-- Tributário -->
+      <article class="area-card animate-on-scroll" id="tributario">
+        <div class="area-header">
+          <div class="area-icon">
+            <img src="Tributário.jpg" alt="Direito Tributário">
+          </div>
+          <h2 class="area-title">Direito Tributário</h2>
+        </div>
+        <div class="area-content">
+          <p>Consultoria e contencioso tributário para pessoas físicas e jurídicas. Análise de tributos, planejamento fiscal e defesa em processos administrativos e judiciais.</p>
+          <ul>
+            <li>Planejamento tributário</li>
+            <li>Defesa em execuções fiscais</li>
+            <li>Recuperação de tributos pagos indevidamente</li>
+            <li>Processos administrativos fiscais</li>
+            <li>Parcelamentos e transações tributárias</li>
+            <li>Análise de incentivos fiscais</li>
+          </ul>
+          <a href="https://wa.me/556599478584?text=Olá! Gostaria de uma consulta sobre Direito Tributário." target="_blank" class="area-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Consultar via WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <!-- Previdenciário -->
+      <article class="area-card animate-on-scroll" id="previdenciario">
+        <div class="area-header">
+          <div class="area-icon">
+            <img src="Previdenciário.jpg" alt="Direito Previdenciário">
+          </div>
+          <h2 class="area-title">Direito Previdenciário</h2>
+        </div>
+        <div class="area-content">
+          <p>Assessoria completa em questões previdenciárias junto ao INSS. Atuamos na obtenção, revisão e manutenção de benefícios previdenciários.</p>
+          <ul>
+            <li>Aposentadoria por tempo de contribuição, idade e especial</li>
+            <li>Auxílio-doença e aposentadoria por invalidez</li>
+            <li>Pensão por morte</li>
+            <li>BPC/LOAS</li>
+            <li>Revisão de benefícios</li>
+            <li>Recursos administrativos e judiciais contra o INSS</li>
+          </ul>
+          <a href="https://wa.me/556599478584?text=Olá! Gostaria de uma consulta sobre Direito Previdenciário." target="_blank" class="area-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Consultar via WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <!-- Coletivo -->
+      <article class="area-card animate-on-scroll" id="coletivo">
+        <div class="area-header">
+          <div class="area-icon">
+            <img src="Direito Coletivo.jpg" alt="Direito Coletivo">
+          </div>
+          <h2 class="area-title">Direito Coletivo</h2>
+        </div>
+        <div class="area-content">
+          <p>Atuação em defesa de direitos coletivos e difusos, representando grupos e comunidades em demandas de interesse público e social.</p>
+          <ul>
+            <li>Ações civis públicas</li>
+            <li>Defesa de direitos difusos e coletivos</li>
+            <li>Mandados de segurança coletivos</li>
+            <li>Ações de improbidade administrativa</li>
+            <li>Tutela de interesses de grupos e comunidades</li>
+            <li>Acordos coletivos e termos de ajustamento de conduta</li>
+          </ul>
+          <a href="https://wa.me/556599478584?text=Olá! Gostaria de uma consulta sobre Direito Coletivo." target="_blank" class="area-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Consultar via WhatsApp
+          </a>
+        </div>
+      </article>
+
+      <!-- Consumidor -->
+      <article class="area-card animate-on-scroll" id="consumidor">
+        <div class="area-header">
+          <div class="area-icon">
+            <img src="Direito do Consumidor.jpg" alt="Direito do Consumidor">
+          </div>
+          <h2 class="area-title">Direito do Consumidor</h2>
+        </div>
+        <div class="area-content">
+          <p>Defesa dos direitos do consumidor em relações de consumo, combatendo práticas abusivas e garantindo reparação por danos.</p>
+          <ul>
+            <li>Ações de indenização por danos materiais e morais</li>
+            <li>Vícios de produtos e serviços</li>
+            <li>Cobranças indevidas e negativação indevida</li>
+            <li>Práticas comerciais abusivas</li>
+            <li>Contratos de adesão e cláusulas abusivas</li>
+            <li>Recall e responsabilidade por fato do produto</li>
+          </ul>
+          <a href="https://wa.me/556599478584?text=Olá! Gostaria de uma consulta sobre Direito do Consumidor." target="_blank" class="area-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Consultar via WhatsApp
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-container animate-on-scroll">
+      <h2 class="cta-title" data-i18n="cta.titleAreas">Precisa de orientação jurídica?</h2>
+      <p class="cta-desc" data-i18n="cta.descAreas">Entre em contato conosco para uma análise personalizada do seu caso. Nossa equipe está pronta para ajudar.</p>
+
+      <div class="cta-buttons">
+        <a href="https://wa.me/556599478584?text=Olá! Gostaria de agendar uma consulta." target="_blank" class="cta-btn primary" data-whatsapp-link>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span data-i18n="cta.whatsapp">Falar no WhatsApp</span>
+        </a>
+        <a href="https://cadastro.vaucherealvares.com" target="_blank" class="cta-btn secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
+          <span data-i18n="cta.register">Preencher cadastro</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="tel:+556530251223" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          (65) 3025-1223
+        </a>
+        <a href="mailto:atendimento@vaucherealvares.com" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          atendimento@vaucherealvares.com
+        </a>
+      </div>
+      <p class="footer-copy" data-i18n="footer.copy">© 2026 Vaucher e Álvares Advogados. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- i18n Script -->
+  <script src="i18n.js"></script>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      const isOpen = mobileMenu.classList.contains('active');
+      menuBtn.innerHTML = isOpen
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        menuBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      });
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

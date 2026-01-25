@@ -1,0 +1,1051 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato | Vaucher e Álvares Advocacia</title>
+  <meta name="description" content="Entre em contato com o escritório Vaucher e Álvares Advocacia em Cuiabá-MT. Telefone, WhatsApp, e-mail e endereço.">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #8B1538;
+      --primary-light: #a91d47;
+      --bg: #ffffff;
+      --bg-subtle: #f8f8f8;
+      --bg-card: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #666666;
+      --text-subtle: #999999;
+      --border: #e5e5e5;
+      --shadow: rgba(0, 0, 0, 0.08); --shadow-hover: rgba(139, 21, 56, 0.15);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Logo watermark esmaecida no fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60%;
+      max-width: 600px;
+      height: 300px;
+      background: url('logo-final.jpg') center center no-repeat;
+      background-size: contain;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border); box-shadow: 0 2px 10px var(--shadow);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .nav-logo span {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text);
+      background: var(--bg-subtle);
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: white;
+      padding: 0.6rem 1.25rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-left: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    /* Language Selector */
+    .lang-selector {
+      display: flex;
+      gap: 0.25rem;
+      margin-left: 0.75rem;
+      background: var(--bg-subtle);
+      border-radius: 8px;
+      padding: 0.25rem;
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active { background: var(--primary); color: white; }
+
+    .nav-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-menu-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 99;
+      padding: 5rem 2rem 2rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.25rem;
+      padding: 1rem;
+      border-radius: 12px;
+      transition: background 0.2s ease;
+    }
+
+    .mobile-menu a:hover {
+      background: var(--bg-subtle);
+    }
+    .mobile-lang-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+    .mobile-lang-selector .lang-btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--primary-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 2rem 2rem 6rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    /* Contact Cards */
+    .contact-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px; box-shadow: 0 4px 20px var(--shadow);
+      padding: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .contact-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px); box-shadow: 0 8px 30px var(--shadow-hover);
+    }
+
+    .contact-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: rgba(139, 21, 56, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-light);
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .contact-info h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-info p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .contact-info .highlight {
+      color: var(--primary-light);
+      font-weight: 500;
+    }
+
+    /* WhatsApp CTA */
+    .whatsapp-cta {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      border: none;
+      padding: 2.5rem;
+    }
+
+    .whatsapp-cta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(37, 211, 102, 0.2);
+    }
+
+    .whatsapp-cta .contact-icon {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .whatsapp-cta h3 {
+      color: white;
+    }
+
+    .whatsapp-cta p {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .whatsapp-cta .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      color: #128C7E;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+
+    .whatsapp-cta .contact-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Map Section */
+    .map-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .map-header {
+      padding: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .map-header h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .map-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .map-container {
+      height: 350px;
+      background: var(--bg-subtle);
+      position: relative;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      
+    }
+
+    .map-overlay {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .map-address {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .map-address-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(139, 21, 56, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-light);
+    }
+
+    .map-address-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .map-address-text {
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .map-address-text strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .map-address-text span {
+      color: var(--text-muted);
+    }
+
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem 1.25rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .map-btn:hover {
+      background: var(--primary-light);
+    }
+
+    .map-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Hours Section */
+    .hours-section {
+      padding: 6rem 2rem;
+      background: var(--bg-subtle);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hours-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .hours-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+    }
+
+    .hours-day {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .hours-time {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .hours-time.closed {
+      color: var(--primary-light);
+    }
+
+    /* Social Section */
+    .social-section {
+      padding: 6rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-container {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      transform: translateY(-4px);
+    }
+
+    .social-link svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 6rem 2rem;
+      background: var(--bg-subtle);
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: var(--primary);
+      color: white;
+      border: 1px solid var(--primary);
+    }
+
+    .cta-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(139, 21, 56, 0.3);
+    }
+
+    .cta-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-info {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-link:hover {
+      color: var(--text);
+    }
+
+    .footer-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .footer-copy {
+      color: var(--text-subtle);
+      font-size: 0.8rem;
+    }
+
+    /* Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta, .lang-selector {
+        display: none;
+      }
+
+      .nav-menu-btn {
+        display: block;
+      }
+
+      .page-header {
+        padding: 7rem 1.5rem 3rem;
+      }
+
+      .contact-section {
+        padding: 2rem 1.5rem 4rem;
+      }
+
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .contact-icon {
+        margin: 0 auto;
+      }
+
+      .map-overlay {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .map-address {
+        flex-direction: column;
+      }
+
+      .hours-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .social-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .cta {
+        padding: 4rem 1.5rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-info {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-icon.png" alt="Vaucher e Álvares">
+      <span>Vaucher e Álvares</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="areas.html" class="nav-link" data-i18n="nav.areas">Áreas de Atuação</a>
+      <a href="equipe.html" class="nav-link" data-i18n="nav.team">Equipe</a>
+      <a href="diferenciais.html" class="nav-link" data-i18n="nav.differentials">Diferenciais</a>
+      <a href="insights.html" class="nav-link" data-i18n="nav.insights">Insights</a>
+      <a href="contato.html" class="nav-link active" data-i18n="nav.contact">Contato</a>
+    </div>
+
+    <a href="https://appcliente.vaucherealvares.com" target="_blank" class="nav-cta" data-i18n="nav.portal">Portal do Cliente</a>
+
+    <div class="lang-selector">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-i18n="nav.home">Início</a>
+    <a href="areas.html" data-i18n="nav.areas">Áreas de Atuação</a>
+    <a href="equipe.html" data-i18n="nav.team">Equipe</a>
+    <a href="diferenciais.html" data-i18n="nav.differentials">Diferenciais</a>
+    <a href="insights.html" data-i18n="nav.insights">Insights</a>
+    <a href="contato.html" data-i18n="nav.contact">Contato</a>
+    <a href="https://appcliente.vaucherealvares.com" target="_blank" data-i18n="nav.portal">Portal do Cliente</a>
+    <div class="mobile-lang-selector">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+  </div>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <p class="page-label" data-i18n="contact.pageLabel">Fale Conosco</p>
+    <h1 class="page-title" data-i18n="contact.pageTitle">Entre em Contato</h1>
+    <p class="page-desc" data-i18n="contact.pageDesc">Estamos prontos para atender você. Escolha o canal de sua preferência e entre em contato conosco.</p>
+  </header>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-container">
+
+      <!-- Contact Cards -->
+      <div class="contact-cards">
+        <a href="https://wa.me/556599478584?text=Olá! Gostaria de informações sobre os serviços jurídicos." target="_blank" class="contact-card whatsapp-cta animate-on-scroll">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <h3>WhatsApp</h3>
+            <p>Atendimento rápido e prático. Resposta em até 2 horas durante o horário comercial.</p>
+            <span class="contact-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+              Enviar mensagem
+            </span>
+          </div>
+        </a>
+
+        <a href="tel:+556530251223" class="contact-card animate-on-scroll">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <h3>Telefone</h3>
+            <p class="highlight">(65) 3025-1223</p>
+            <p>Ligações durante o horário comercial</p>
+          </div>
+        </a>
+
+        <a href="mailto:atendimento@vaucherealvares.com" class="contact-card animate-on-scroll">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <h3>E-mail</h3>
+            <p class="highlight">atendimento@vaucherealvares.com</p>
+            <p>Para assuntos formais e documentos</p>
+          </div>
+        </a>
+
+        <a href="https://cadastro.vaucherealvares.com" target="_blank" class="contact-card animate-on-scroll">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="12" y1="18" x2="12" y2="12"/>
+              <line x1="9" y1="15" x2="15" y2="15"/>
+            </svg>
+          </div>
+          <div class="contact-info">
+            <h3>Cadastro Online</h3>
+            <p>Preencha seus dados e aguarde nosso contato para iniciar seu atendimento.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Map Section -->
+      <div class="map-section animate-on-scroll">
+        <div class="map-header">
+          <h3>Nossa Localização</h3>
+          <p>Visite nosso escritório em Cuiabá-MT</p>
+        </div>
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3842.7580736576384!2d-56.0702!3d-15.5989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTXCsDM1JzU2LjAiUyA1NsKwMDQnMTIuNyJX!5e0!3m2!1spt-BR!2sbr!4v1610000000000!5m2!1spt-BR!2sbr"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <div class="map-overlay">
+            <div class="map-address">
+              <div class="map-address-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="map-address-text">
+                <strong>Rua Lima, 106</strong>
+                <span>Jardim das Américas, Cuiabá - MT</span>
+              </div>
+            </div>
+            <a href="https://maps.google.com/?q=Rua+Lima+106+Jardim+das+Americas+Cuiaba" target="_blank" class="map-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+              </svg>
+              Rotas
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Hours Section -->
+  <section class="hours-section">
+    <div class="hours-container animate-on-scroll">
+      <p class="page-label">Atendimento</p>
+      <h2 class="page-title">Horário de Funcionamento</h2>
+
+      <div class="hours-grid">
+        <div class="hours-card">
+          <div class="hours-day">Segunda a Sexta</div>
+          <div class="hours-time">08:00 - 18:00</div>
+        </div>
+        <div class="hours-card">
+          <div class="hours-day">Sábado</div>
+          <div class="hours-time">09:00 - 12:00</div>
+        </div>
+        <div class="hours-card">
+          <div class="hours-day">Domingo</div>
+          <div class="hours-time closed">Fechado</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Section -->
+  <section class="social-section">
+    <div class="social-container animate-on-scroll">
+      <p class="page-label">Redes Sociais</p>
+      <h2 class="page-title">Siga-nos</h2>
+
+      <div class="social-links">
+        <a href="https://instagram.com/vaucherealvares" target="_blank" class="social-link" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="https://facebook.com/vaucherealvares" target="_blank" class="social-link" title="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <a href="https://linkedin.com/company/vaucherealvares" target="_blank" class="social-link" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-container animate-on-scroll">
+      <h2 class="cta-title">Já é nosso cliente?</h2>
+      <p class="cta-desc">Acesse o portal do cliente para acompanhar seus processos, documentos e se comunicar com sua equipe jurídica.</p>
+
+      <a href="https://appcliente.vaucherealvares.com" target="_blank" class="cta-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+          <polyline points="10 17 15 12 10 7"/>
+          <line x1="15" y1="12" x2="3" y2="12"/>
+        </svg>
+        Acessar Portal do Cliente
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="tel:+556530251223" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          (65) 3025-1223
+        </a>
+        <a href="mailto:atendimento@vaucherealvares.com" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          atendimento@vaucherealvares.com
+        </a>
+      </div>
+      <p class="footer-copy" data-i18n="footer.copy">© 2026 Vaucher e Álvares Advogados. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="i18n.js"></script>
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      const isOpen = mobileMenu.classList.contains('active');
+      menuBtn.innerHTML = isOpen
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        menuBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      });
+    });
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

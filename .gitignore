@@ -1,0 +1,19 @@
+# Diretórios
+landing-vaucher/
+node_modules/
+
+# Arquivos temporários
+*.tmp
+*.temp
+contato_temp.txt
+contato_new.html
+
+# Documentos Word
+*.docx
+
+# Scripts de desenvolvimento
+*.ps1
+
+# Sistema
+.DS_Store
+Thumbs.db

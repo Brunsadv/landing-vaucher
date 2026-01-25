@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vaucher e Álvares | Advocacia</title>
+  <meta name="description" content="Escritório de advocacia em Cuiabá-MT. Direito Sindical, Trabalhista, Administrativo, Penal, Tributário e Previdenciário.">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Vaucher e Álvares | Advocacia">
+  <meta property="og:description" content="Escritório de advocacia em Cuiabá-MT. Atendimento humanizado e resultados concretos.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="logo-icon.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #8B1538;
+      --primary-light: #a91d47;
+      --primary-dark: #6d1029;
+      --bg: #ffffff;
+      --bg-subtle: #f8f8f8;
+      --bg-card: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #666666;
+      --text-subtle: #999999;
+      --border: #e5e5e5;
+      --border-hover: #d0d0d0;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --shadow-hover: rgba(139, 21, 56, 0.15);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Subtle background pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 21, 56, 0.03), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(139, 21, 56, 0.02), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .nav-logo span {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+      background: rgba(139, 21, 56, 0.05);
+    }
+
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: white;
+      padding: 0.6rem 1.25rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-left: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-light);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px var(--shadow-hover);
+    }
+
+    /* Language Selector */
+    .lang-selector {
+      display: flex;
+      gap: 0.25rem;
+      margin-left: 0.75rem;
+      background: var(--bg-subtle);
+      border-radius: 8px;
+      padding: 0.25rem;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .lang-btn:hover {
+      color: var(--text);
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .nav-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-menu-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 5rem 2rem 2rem;
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-subtle) 100%);
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      max-width: 900px;
+      position: relative;
+      gap: 0;
+    }
+
+    /* Logo grande como elemento principal */
+    .logo {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Main heading */
+    .headline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.2s forwards;
+    }
+
+    .headline em {
+      font-style: normal;
+      color: var(--primary);
+    }
+
+    /* Search box */
+    .search-container {
+      width: 100%;
+      max-width: 520px;
+      position: relative;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+    }
+
+    .search-box {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 60px;
+      padding: 0.2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px var(--shadow);
+    }
+
+    .search-box:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 4px 20px var(--shadow-hover);
+    }
+
+    .search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 1rem 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-subtle);
+    }
+
+    .search-btn {
+      background: var(--primary);
+      border: none;
+      border-radius: 50px;
+      padding: 0.85rem 1.75rem;
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .search-btn:hover {
+      background: var(--primary-light);
+      transform: scale(1.02);
+    }
+
+    .search-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Suggestions */
+    .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.6s forwards;
+    }
+
+    .suggestion {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .suggestion:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(139, 21, 56, 0.03);
+    }
+
+    /* Dropdown results */
+    .search-results {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+      z-index: 100;
+      box-shadow: 0 10px 40px var(--shadow);
+    }
+
+    .search-results.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .result-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .result-item:hover {
+      background: rgba(139, 21, 56, 0.03);
+    }
+
+    .result-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(139, 21, 56, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .result-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .result-content {
+      text-align: left;
+    }
+
+    .result-title {
+      font-weight: 500;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+      color: var(--text);
+    }
+
+    .result-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-subtle);
+      font-size: 0.75rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .scroll-indicator svg {
+      width: 20px;
+      height: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(6px); }
+      60% { transform: translateY(3px); }
+    }
+
+    /* Features Section */
+    .features {
+      padding: 6rem 2rem;
+      position: relative;
+      z-index: 1;
+      background: var(--bg);
+    }
+
+    .features-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+    }
+
+    .feature-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px var(--shadow-hover);
+    }
+
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -2px -2px 8px rgba(255, 255, 255, 0.9);
+      transition: all 0.2s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.12), -1px -1px 4px rgba(255, 255, 255, 0.8);
+      transform: scale(0.98);
+    }
+
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .feature-icon img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .feature-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .feature-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .feature-link svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s ease;
+    }
+
+    .feature-card:hover .feature-link svg {
+      transform: translateX(4px);
+    }
+
+    /* Areas Section */
+    .areas {
+      padding: 6rem 2rem;
+      background: var(--bg-subtle);
+      position: relative;
+      z-index: 1;
+    }
+
+    .areas-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .area-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .area-item:hover {
+      border-color: var(--primary);
+      background: var(--bg);
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+
+    .area-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1rem;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1), -2px -2px 8px rgba(255, 255, 255, 0.9);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .area-item:hover .area-icon {
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15), -1px -1px 4px rgba(255, 255, 255, 0.9);
+      transform: scale(0.97);
+    }
+
+    .area-item:active .area-icon {
+      box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1), inset -1px -1px 3px rgba(255, 255, 255, 0.8);
+      transform: scale(0.95);
+    }
+
+    .area-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .area-icon img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .area-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* CTA Section */
+    .cta {
+      padding: 6rem 2rem;
+      position: relative;
+      z-index: 1;
+      background: var(--bg);
+    }
+
+    .cta-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    .cta-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn.primary {
+      background: var(--primary);
+      color: white;
+      border: 2px solid var(--primary);
+    }
+
+    .cta-btn.primary:hover {
+      background: var(--primary-light);
+      border-color: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--shadow-hover);
+    }
+
+    .cta-btn.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+
+    .cta-btn.secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .cta-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+      background: var(--bg-subtle);
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-info {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-link:hover {
+      color: var(--primary);
+    }
+
+    .footer-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .footer-copy {
+      color: var(--text-subtle);
+      font-size: 0.8rem;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      z-index: 99;
+      padding: 5rem 2rem 2rem;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.25rem;
+      padding: 1rem;
+      border-radius: 12px;
+      transition: background 0.2s ease;
+    }
+
+    .mobile-menu a:hover {
+      background: rgba(139, 21, 56, 0.05);
+    }
+
+    .mobile-lang-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+
+    .mobile-lang-selector .lang-btn {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scroll animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .lang-selector {
+        display: none;
+      }
+
+      .nav-menu-btn {
+        display: block;
+      }
+
+      .hero {
+        padding: 5rem 1.5rem 2rem;
+      }
+
+      .logo {
+        max-width: 100%;
+        margin-bottom: 1.25rem;
+      }
+
+      .headline {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      .headline {
+        margin-bottom: 2rem;
+      }
+
+      .search-box {
+        flex-direction: column;
+        padding: 0.5rem;
+        border-radius: 24px;
+      }
+
+      .search-input {
+        padding: 1rem 1.25rem;
+        text-align: center;
+      }
+
+      .search-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .suggestions {
+        gap: 0.5rem;
+      }
+
+      .suggestion {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+      }
+
+      .features, .areas, .cta {
+        padding: 4rem 1.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .areas-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-info {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .scroll-indicator {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 4.5rem 1rem 2rem;
+      }
+
+      .logo {
+        margin-bottom: 1rem;
+      }
+
+      .headline {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .search-input {
+        padding: 0.85rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .search-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8rem;
+      }
+
+      .suggestions {
+        gap: 0.4rem;
+        margin-top: 1rem;
+      }
+
+      .suggestion {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">
+      <img src="logo-icon.png" alt="Vaucher e Álvares">
+      <span>Vaucher e Álvares</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="areas.html" class="nav-link" data-i18n="nav.areas">Áreas de Atuação</a>
+      <a href="equipe.html" class="nav-link" data-i18n="nav.team">Equipe</a>
+      <a href="diferenciais.html" class="nav-link" data-i18n="nav.differentials">Diferenciais</a>
+      <a href="insights.html" class="nav-link" data-i18n="nav.insights">Insights</a>
+      <a href="contato.html" class="nav-link" data-i18n="nav.contact">Contato</a>
+    </div>
+
+    <a href="https://appcliente.vaucherealvares.com" target="_blank" class="nav-cta" data-i18n="nav.portal">Portal do Cliente</a>
+
+    <!-- Language Selector -->
+    <div class="lang-selector">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="areas.html" data-i18n="nav.areas">Áreas de Atuação</a>
+    <a href="equipe.html" data-i18n="nav.team">Equipe</a>
+    <a href="diferenciais.html" data-i18n="nav.differentials">Diferenciais</a>
+    <a href="insights.html" data-i18n="nav.insights">Insights</a>
+    <a href="contato.html" data-i18n="nav.contact">Contato</a>
+    <a href="https://appcliente.vaucherealvares.com" target="_blank" data-i18n="nav.portal">Portal do Cliente</a>
+    <!-- Mobile Language Selector -->
+    <div class="mobile-lang-selector">
+      <button class="lang-btn active" data-lang="pt">PT</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <!-- Logo final -->
+      <div class="logo">
+        <img src="logo-final.jpg" alt="Vaucher & Álvares - Sociedade de Advogados">
+      </div>
+
+      <!-- Headline -->
+      <h1 class="headline" data-i18n="hero.headline" data-i18n-html="true">
+        Como podemos <em>ajudar</em> você hoje?
+      </h1>
+
+      <!-- Search Box -->
+      <div class="search-container">
+        <div class="search-box">
+          <input
+            type="text"
+            class="search-input"
+            id="searchInput"
+            placeholder="Digite o que você precisa..."
+            data-i18n-placeholder="hero.placeholder"
+            autocomplete="off"
+          >
+          <button class="search-btn" id="searchBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            <span data-i18n="hero.send">Enviar</span>
+          </button>
+        </div>
+
+        <!-- Dropdown Results -->
+        <div class="search-results" id="searchResults">
+          <a href="https://appcliente.vaucherealvares.com" class="result-item">
+            <div class="result-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                <polyline points="10 17 15 12 10 7"/>
+                <line x1="15" y1="12" x2="3" y2="12"/>
+              </svg>
+            </div>
+            <div class="result-content">
+              <div class="result-title" data-i18n="search.accessProcess">Acessar meu processo</div>
+              <div class="result-desc" data-i18n="search.accessProcessDesc">Portal do cliente - acompanhe andamentos</div>
+            </div>
+          </a>
+          <a href="https://wa.me/556599478584?text=Olá! Gostaria de agendar uma consulta." target="_blank" class="result-item" id="whatsappLink">
+            <div class="result-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <div class="result-content">
+              <div class="result-title" data-i18n="search.talkLawyer">Falar com advogado</div>
+              <div class="result-desc" data-i18n="search.talkLawyerDesc">WhatsApp - atendimento imediato</div>
+            </div>
+          </a>
+          <a href="https://cadastro.vaucherealvares.com" target="_blank" class="result-item">
+            <div class="result-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <line x1="9" y1="15" x2="15" y2="15"/>
+              </svg>
+            </div>
+            <div class="result-content">
+              <div class="result-title" data-i18n="search.newConsult">Nova consulta</div>
+              <div class="result-desc" data-i18n="search.newConsultDesc">Preencher cadastro online</div>
+            </div>
+          </a>
+          <a href="tel:+556530251223" class="result-item">
+            <div class="result-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div class="result-content">
+              <div class="result-title" data-i18n="search.callOffice">Ligar para o escritório</div>
+              <div class="result-desc">(65) 3025-1223</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick suggestions -->
+      <div class="suggestions">
+        <button class="suggestion" data-action="processo" data-i18n="suggestion.process">Acompanhar processo</button>
+        <button class="suggestion" data-action="consulta" data-i18n="suggestion.schedule">Agendar consulta</button>
+        <button class="suggestion" data-action="whatsapp" data-i18n="suggestion.whatsapp">Falar no WhatsApp</button>
+        <button class="suggestion" data-action="areas" data-i18n="suggestion.areas">Áreas de atuação</button>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <a href="#features" class="scroll-indicator">
+      <span data-i18n="hero.learnMore">Saiba mais</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="features-container">
+      <div class="section-header animate-on-scroll">
+        <p class="section-label" data-i18n="features.label">Por que nos escolher</p>
+        <h2 class="section-title" data-i18n="features.title">Advocacia com propósito e resultados</h2>
+      </div>
+
+      <div class="features-grid">
+        <a href="diferenciais.html" class="feature-card animate-on-scroll">
+          <div class="feature-icon">
+            <img src="Experiência_Comprovada.jpg" alt="Experiência Comprovada">
+          </div>
+          <h3 class="feature-title" data-i18n="features.experience.title">Experiência Comprovada</h3>
+          <p class="feature-desc" data-i18n="features.experience.desc">Mais de 15 anos de atuação jurídica com milhares de casos resolvidos com sucesso em diversas áreas do Direito.</p>
+          <span class="feature-link">
+            <span data-i18n="features.experience.link">Conheça nossos diferenciais</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+
+        <a href="equipe.html" class="feature-card animate-on-scroll">
+          <div class="feature-icon">
+            <img src="Equipe Especializada.jpg" alt="Equipe Especializada">
+          </div>
+          <h3 class="feature-title" data-i18n="features.team.title">Equipe Especializada</h3>
+          <p class="feature-desc" data-i18n="features.team.desc">Advogados especializados em cada área de atuação, garantindo conhecimento técnico aprofundado em cada caso.</p>
+          <span class="feature-link">
+            <span data-i18n="features.team.link">Conheça nossa equipe</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+
+        <a href="https://appcliente.vaucherealvares.com" target="_blank" class="feature-card animate-on-scroll">
+          <div class="feature-icon">
+            <img src="Portal do Cliente.jpg" alt="Portal do Cliente">
+          </div>
+          <h3 class="feature-title" data-i18n="features.portal.title">Portal do Cliente</h3>
+          <p class="feature-desc" data-i18n="features.portal.desc">Acompanhe seu processo em tempo real, acesse documentos e comunique-se diretamente com sua equipe jurídica.</p>
+          <span class="feature-link">
+            <span data-i18n="features.portal.link">Acessar portal</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Areas Section -->
+  <section class="areas" id="areas">
+    <div class="areas-container">
+      <div class="section-header animate-on-scroll">
+        <p class="section-label" data-i18n="areas.label">Áreas de Atuação</p>
+        <h2 class="section-title" data-i18n="areas.title">Expertise em diversas áreas do Direito</h2>
+      </div>
+
+      <div class="areas-grid">
+        <a href="areas.html#sindical" class="area-item animate-on-scroll">
+          <div class="area-icon">
+            <img src="Sindical.jpg" alt="Direito Sindical">
+          </div>
+          <span class="area-name" data-i18n="areas.union">Sindical</span>
+        </a>
+
+        <a href="areas.html#trabalhista" class="area-item animate-on-scroll">
+          <div class="area-icon">
+            <img src="Trabalhista.jpg" alt="Direito Trabalhista">
+          </div>
+          <span class="area-name" data-i18n="areas.labor">Trabalhista</span>
+        </a>
+
+        <a href="areas.html#administrativo" class="area-item animate-on-scroll">
+          <div class="area-icon">
+            <img src="Administrativo.jpg" alt="Direito Administrativo">
+          </div>
+          <span class="area-name" data-i18n="areas.admin">Administrativo</span>
+        </a>
+
+        <a href="areas.html#penal" class="area-item animate-on-scroll">
+          <div class="area-icon">
+            <img src="Penal.jpg" alt="Direito Penal">
+          </div>
+          <span class="area-name" data-i18n="areas.criminal">Penal</span>
+        </a>
+
+        <a href="areas.html#tributario" class="area-item animate-on-scroll">
+          <div class="area-icon">
+            <img src="Tributário.jpg" alt="Direito Tributário">
+          </div>
+          <span class="area-name" data-i18n="areas.tax">Tributário</span>
+        </a>
+
+        <a href="areas.html#previdenciario" class="area-item animate-on-scroll">
+          <div class="area-icon">
+            <img src="Previdenciário.jpg" alt="Direito Previdenciário">
+          </div>
+          <span class="area-name" data-i18n="areas.social">Previdenciário</span>
+        </a>
+
+        <a href="areas.html#coletivo" class="area-item animate-on-scroll">
+          <div class="area-icon">
+            <img src="Direito Coletivo.jpg" alt="Direito Coletivo">
+          </div>
+          <span class="area-name" data-i18n="areas.collective">Coletivo</span>
+        </a>
+
+        <a href="areas.html#consumidor" class="area-item animate-on-scroll">
+          <div class="area-icon">
+            <img src="Direito do Consumidor.jpg" alt="Direito do Consumidor">
+          </div>
+          <span class="area-name" data-i18n="areas.consumer">Consumidor</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-container animate-on-scroll">
+      <h2 class="cta-title" data-i18n="cta.title">Pronto para resolver sua questão jurídica?</h2>
+      <p class="cta-desc" data-i18n="cta.desc">Entre em contato conosco e agende uma consulta. Nossa equipe está pronta para ajudar você.</p>
+
+      <div class="cta-buttons">
+        <a href="https://wa.me/556599478584?text=Olá! Gostaria de agendar uma consulta." target="_blank" class="cta-btn primary" id="ctaWhatsapp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span data-i18n="cta.whatsapp">Falar no WhatsApp</span>
+        </a>
+        <a href="https://cadastro.vaucherealvares.com" target="_blank" class="cta-btn secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
+          <span data-i18n="cta.register">Preencher cadastro</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-info">
+        <a href="tel:+556530251223" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          (65) 3025-1223
+        </a>
+        <a href="https://maps.google.com/?q=Rua+Lima+106+Jardim+das+Americas+Cuiaba" target="_blank" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Rua Lima, 106 - Jardim das Américas, Cuiabá - MT
+        </a>
+        <a href="mailto:atendimento@vaucherealvares.com" class="footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          atendimento@vaucherealvares.com
+        </a>
+      </div>
+      <p class="footer-copy" data-i18n="footer.copy">© 2026 Vaucher e Álvares Advogados. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================
+    // INTERNATIONALIZATION (i18n) SYSTEM
+    // ============================================
+    const translations = {
+      pt: {
+        // Navigation
+        'nav.areas': 'Áreas de Atuação',
+        'nav.team': 'Equipe',
+        'nav.differentials': 'Diferenciais',
+        'nav.insights': 'Insights',
+        'nav.contact': 'Contato',
+        'nav.portal': 'Portal do Cliente',
+
+        // Hero Section
+        'hero.headline': 'Como podemos <em>ajudar</em> você hoje?',
+        'hero.placeholder': 'Digite o que você precisa...',
+        'hero.send': 'Enviar',
+        'hero.learnMore': 'Saiba mais',
+
+        // Search Results
+        'search.accessProcess': 'Acessar meu processo',
+        'search.accessProcessDesc': 'Portal do cliente - acompanhe andamentos',
+        'search.talkLawyer': 'Falar com advogado',
+        'search.talkLawyerDesc': 'WhatsApp - atendimento imediato',
+        'search.newConsult': 'Nova consulta',
+        'search.newConsultDesc': 'Preencher cadastro online',
+        'search.callOffice': 'Ligar para o escritório',
+
+        // Suggestions
+        'suggestion.process': 'Acompanhar processo',
+        'suggestion.schedule': 'Agendar consulta',
+        'suggestion.whatsapp': 'Falar no WhatsApp',
+        'suggestion.areas': 'Áreas de atuação',
+
+        // Features Section
+        'features.label': 'Por que nos escolher',
+        'features.title': 'Advocacia com propósito e resultados',
+        'features.experience.title': 'Experiência Comprovada',
+        'features.experience.desc': 'Mais de 15 anos de atuação jurídica com milhares de casos resolvidos com sucesso em diversas áreas do Direito.',
+        'features.experience.link': 'Conheça nossos diferenciais',
+        'features.team.title': 'Equipe Especializada',
+        'features.team.desc': 'Advogados especializados em cada área de atuação, garantindo conhecimento técnico aprofundado em cada caso.',
+        'features.team.link': 'Conheça nossa equipe',
+        'features.portal.title': 'Portal do Cliente',
+        'features.portal.desc': 'Acompanhe seu processo em tempo real, acesse documentos e comunique-se diretamente com sua equipe jurídica.',
+        'features.portal.link': 'Acessar portal',
+
+        // Areas Section
+        'areas.label': 'Áreas de Atuação',
+        'areas.title': 'Expertise em diversas áreas do Direito',
+        'areas.union': 'Sindical',
+        'areas.labor': 'Trabalhista',
+        'areas.admin': 'Administrativo',
+        'areas.criminal': 'Penal',
+        'areas.tax': 'Tributário',
+        'areas.social': 'Previdenciário',
+        'areas.collective': 'Coletivo',
+        'areas.consumer': 'Consumidor',
+
+        // CTA Section
+        'cta.title': 'Pronto para resolver sua questão jurídica?',
+        'cta.desc': 'Entre em contato conosco e agende uma consulta. Nossa equipe está pronta para ajudar você.',
+        'cta.whatsapp': 'Falar no WhatsApp',
+        'cta.register': 'Preencher cadastro',
+
+        // Footer
+        'footer.copy': '© 2026 Vaucher e Álvares Advogados. Todos os direitos reservados.',
+
+        // WhatsApp messages
+        'whatsapp.greeting': 'Olá! Gostaria de agendar uma consulta.'
+      },
+
+      en: {
+        // Navigation
+        'nav.areas': 'Practice Areas',
+        'nav.team': 'Team',
+        'nav.differentials': 'Differentials',
+        'nav.insights': 'Insights',
+        'nav.contact': 'Contact',
+        'nav.portal': 'Client Portal',
+
+        // Hero Section
+        'hero.headline': 'How can we <em>help</em> you today?',
+        'hero.placeholder': 'Type what you need...',
+        'hero.send': 'Send',
+        'hero.learnMore': 'Learn more',
+
+        // Search Results
+        'search.accessProcess': 'Access my case',
+        'search.accessProcessDesc': 'Client portal - track progress',
+        'search.talkLawyer': 'Talk to a lawyer',
+        'search.talkLawyerDesc': 'WhatsApp - immediate assistance',
+        'search.newConsult': 'New consultation',
+        'search.newConsultDesc': 'Fill out online registration',
+        'search.callOffice': 'Call the office',
+
+        // Suggestions
+        'suggestion.process': 'Track case',
+        'suggestion.schedule': 'Schedule consultation',
+        'suggestion.whatsapp': 'Chat on WhatsApp',
+        'suggestion.areas': 'Practice areas',
+
+        // Features Section
+        'features.label': 'Why choose us',
+        'features.title': 'Law practice with purpose and results',
+        'features.experience.title': 'Proven Experience',
+        'features.experience.desc': 'Over 15 years of legal practice with thousands of successfully resolved cases across various areas of Law.',
+        'features.experience.link': 'Discover our differentials',
+        'features.team.title': 'Specialized Team',
+        'features.team.desc': 'Lawyers specialized in each practice area, ensuring in-depth technical knowledge in every case.',
+        'features.team.link': 'Meet our team',
+        'features.portal.title': 'Client Portal',
+        'features.portal.desc': 'Track your case in real-time, access documents, and communicate directly with your legal team.',
+        'features.portal.link': 'Access portal',
+
+        // Areas Section
+        'areas.label': 'Practice Areas',
+        'areas.title': 'Expertise in various areas of Law',
+        'areas.union': 'Union Law',
+        'areas.labor': 'Labor Law',
+        'areas.admin': 'Administrative',
+        'areas.criminal': 'Criminal',
+        'areas.tax': 'Tax Law',
+        'areas.social': 'Social Security',
+        'areas.collective': 'Collective',
+        'areas.consumer': 'Consumer',
+
+        // CTA Section
+        'cta.title': 'Ready to resolve your legal matter?',
+        'cta.desc': 'Contact us and schedule a consultation. Our team is ready to help you.',
+        'cta.whatsapp': 'Chat on WhatsApp',
+        'cta.register': 'Fill out registration',
+
+        // Footer
+        'footer.copy': '© 2026 Vaucher e Álvares Lawyers. All rights reserved.',
+
+        // WhatsApp messages
+        'whatsapp.greeting': 'Hello! I would like to schedule a consultation.'
+      },
+
+      es: {
+        // Navigation
+        'nav.areas': 'Áreas de Práctica',
+        'nav.team': 'Equipo',
+        'nav.differentials': 'Diferenciales',
+        'nav.insights': 'Insights',
+        'nav.contact': 'Contacto',
+        'nav.portal': 'Portal del Cliente',
+
+        // Hero Section
+        'hero.headline': '¿Cómo podemos <em>ayudarte</em> hoy?',
+        'hero.placeholder': 'Escribe lo que necesitas...',
+        'hero.send': 'Enviar',
+        'hero.learnMore': 'Más información',
+
+        // Search Results
+        'search.accessProcess': 'Acceder a mi caso',
+        'search.accessProcessDesc': 'Portal del cliente - seguimiento de avances',
+        'search.talkLawyer': 'Hablar con un abogado',
+        'search.talkLawyerDesc': 'WhatsApp - atención inmediata',
+        'search.newConsult': 'Nueva consulta',
+        'search.newConsultDesc': 'Completar registro en línea',
+        'search.callOffice': 'Llamar a la oficina',
+
+        // Suggestions
+        'suggestion.process': 'Seguir caso',
+        'suggestion.schedule': 'Agendar consulta',
+        'suggestion.whatsapp': 'Hablar por WhatsApp',
+        'suggestion.areas': 'Áreas de práctica',
+
+        // Features Section
+        'features.label': 'Por qué elegirnos',
+        'features.title': 'Abogacía con propósito y resultados',
+        'features.experience.title': 'Experiencia Comprobada',
+        'features.experience.desc': 'Más de 15 años de práctica legal con miles de casos resueltos exitosamente en diversas áreas del Derecho.',
+        'features.experience.link': 'Conozca nuestros diferenciales',
+        'features.team.title': 'Equipo Especializado',
+        'features.team.desc': 'Abogados especializados en cada área de práctica, garantizando conocimiento técnico profundo en cada caso.',
+        'features.team.link': 'Conozca nuestro equipo',
+        'features.portal.title': 'Portal del Cliente',
+        'features.portal.desc': 'Siga su caso en tiempo real, acceda a documentos y comuníquese directamente con su equipo legal.',
+        'features.portal.link': 'Acceder al portal',
+
+        // Areas Section
+        'areas.label': 'Áreas de Práctica',
+        'areas.title': 'Experiencia en diversas áreas del Derecho',
+        'areas.union': 'Sindical',
+        'areas.labor': 'Laboral',
+        'areas.admin': 'Administrativo',
+        'areas.criminal': 'Penal',
+        'areas.tax': 'Tributario',
+        'areas.social': 'Previsional',
+        'areas.collective': 'Colectivo',
+        'areas.consumer': 'Consumidor',
+
+        // CTA Section
+        'cta.title': '¿Listo para resolver su cuestión legal?',
+        'cta.desc': 'Contáctenos y agende una consulta. Nuestro equipo está listo para ayudarle.',
+        'cta.whatsapp': 'Hablar por WhatsApp',
+        'cta.register': 'Completar registro',
+
+        // Footer
+        'footer.copy': '© 2026 Vaucher e Álvares Abogados. Todos los derechos reservados.',
+
+        // WhatsApp messages
+        'whatsapp.greeting': '¡Hola! Me gustaría agendar una consulta.'
+      }
+    };
+
+    // Get current language from localStorage or default to 'pt'
+    let currentLang = localStorage.getItem('language') || 'pt';
+
+    // Apply translations to the page
+    function applyTranslations(lang) {
+      const t = translations[lang];
+      if (!t) return;
+
+      // Update all elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+          // Check if element has HTML content (like headline with <em>)
+          if (el.getAttribute('data-i18n-html') === 'true') {
+            el.innerHTML = t[key];
+          } else {
+            // Preserve SVG icons if present
+            const svg = el.querySelector('svg');
+            if (svg) {
+              el.innerHTML = t[key];
+              el.prepend(svg);
+              el.insertBefore(document.createTextNode(' '), svg.nextSibling);
+            } else {
+              el.textContent = t[key];
+            }
+          }
+        }
+      });
+
+      // Update placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (t[key]) {
+          el.placeholder = t[key];
+        }
+      });
+
+      // Update WhatsApp links with localized messages
+      const whatsappMsg = encodeURIComponent(t['whatsapp.greeting']);
+      const whatsappBaseUrl = 'https://wa.me/556599478584?text=';
+
+      const whatsappLink = document.getElementById('whatsappLink');
+      if (whatsappLink) {
+        whatsappLink.href = whatsappBaseUrl + whatsappMsg;
+      }
+
+      const ctaWhatsapp = document.getElementById('ctaWhatsapp');
+      if (ctaWhatsapp) {
+        ctaWhatsapp.href = whatsappBaseUrl + whatsappMsg;
+      }
+
+      // Update HTML lang attribute
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+
+      // Update active state of language buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      // Store preference
+      localStorage.setItem('language', lang);
+      currentLang = lang;
+    }
+
+    // Language switcher event listeners
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        applyTranslations(btn.dataset.lang);
+      });
+    });
+
+    // Apply initial translations
+    applyTranslations(currentLang);
+
+    // ============================================
+    // MOBILE MENU
+    // ============================================
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      const isOpen = mobileMenu.classList.contains('active');
+      menuBtn.innerHTML = isOpen
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        menuBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      });
+    });
+
+    // ============================================
+    // SEARCH FUNCTIONALITY
+    // ============================================
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    const suggestions = document.querySelectorAll('.suggestion');
+
+    searchInput.addEventListener('focus', () => {
+      searchResults.classList.add('active');
+    });
+
+    searchInput.addEventListener('blur', () => {
+      setTimeout(() => {
+        searchResults.classList.remove('active');
+      }, 200);
+    });
+
+    searchInput.addEventListener('input', () => {
+      if (searchInput.value.length > 0) {
+        searchResults.classList.add('active');
+      }
+    });
+
+    // Suggestion click handlers
+    const actions = {
+      processo: 'https://appcliente.vaucherealvares.com',
+      consulta: 'https://cadastro.vaucherealvares.com',
+      whatsapp: () => {
+        const msg = translations[currentLang]['whatsapp.greeting'];
+        return `https://wa.me/556599478584?text=${encodeURIComponent(msg)}`;
+      },
+      areas: 'areas.html'
+    };
+
+    suggestions.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.dataset.action;
+        if (actions[action]) {
+          const url = typeof actions[action] === 'function' ? actions[action]() : actions[action];
+          if (action === 'processo' || action === 'areas') {
+            window.location.href = url;
+          } else {
+            window.open(url, '_blank');
+          }
+        }
+      });
+    });
+
+    // Search button click
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      const query = searchInput.value.trim();
+      const greeting = translations[currentLang]['whatsapp.greeting'].split('!')[0] + '! ';
+      if (query) {
+        window.open(`https://wa.me/556599478584?text=${encodeURIComponent(greeting + query)}`, '_blank');
+      } else {
+        searchInput.focus();
+      }
+    });
+
+    // Enter key to submit
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        document.getElementById('searchBtn').click();
+      }
+    });
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Navbar shadow on scroll
+    const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+      } else {
+        nav.style.boxShadow = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
