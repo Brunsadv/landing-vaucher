@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insight | Vaucher e Alvares Advocacia</title>
+  <meta name="description" content="Artigo juridico do escritorio Vaucher e Alvares.">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #8B1538;
+      --primary-light: #a91d47;
+      --primary-dark: #6d1029;
+      --bg: #ffffff;
+      --bg-subtle: #f8f8f8;
+      --text: #1a1a1a;
+      --text-muted: #666666;
+      --text-subtle: #999999;
+      --border: #e5e5e5;
+      --shadow: rgba(0, 0, 0, 0.08);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .nav-logo span {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-back:hover {
+      color: var(--primary);
+      background: rgba(139, 21, 56, 0.05);
+    }
+
+    .nav-back svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Main Content */
+    .main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 7rem 2rem 4rem;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Error */
+    .error {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+    }
+
+    .error h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .error a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .error a:hover {
+      text-decoration: underline;
+    }
+
+    /* Article Header */
+    .article-header {
+      margin-bottom: 2rem;
+    }
+
+    .article-category {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .article-category.jurisprudencia {
+      background: #3b82f6;
+    }
+
+    .article-category.alerta {
+      background: #f59e0b;
+    }
+
+    .article-category.noticia {
+      background: #10b981;
+    }
+
+    .article-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .article-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .article-meta svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Article Image */
+    .article-image {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 2rem;
+    }
+
+    /* Article Content */
+    .article-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    .article-content p {
+      margin-bottom: 1.5rem;
+    }
+
+    .article-content h2, .article-content h3 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      margin: 2rem 0 1rem;
+    }
+
+    .article-content h2 {
+      font-size: 1.5rem;
+    }
+
+    .article-content h3 {
+      font-size: 1.25rem;
+    }
+
+    .article-content ul, .article-content ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .article-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .article-content blockquote {
+      border-left: 4px solid var(--primary);
+      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* Tags */
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .tag {
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      padding: 0.35rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+    }
+
+    /* Source */
+    .article-source {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--bg-subtle);
+      border-radius: 12px;
+    }
+
+    .article-source p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .article-source a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .article-source a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg-subtle);
+      margin-top: 4rem;
+    }
+
+    .footer-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-copy {
+      color: var(--text-subtle);
+      font-size: 0.8rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 1rem;
+      }
+
+      .main {
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .article-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-icon.png" alt="Vaucher e Alvares">
+      <span>Vaucher e Alvares</span>
+    </a>
+
+    <a href="insights.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      <span data-i18n="insight.back">Voltar para Insights</span>
+    </a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main" id="main-content">
+    <div class="loading" id="loading">
+      <div class="loading-spinner"></div>
+      <p data-i18n="insight.loading">Carregando...</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p class="footer-copy" data-i18n="footer.copy">2026 Vaucher e Alvares Advogados. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- i18n Script -->
+  <script src="i18n.js"></script>
+
+  <script>
+    const INSIGHTS_API_URL = 'https://vaucher-sistema-production.up.railway.app';
+
+    function getCurrentLang() {
+      return localStorage.getItem('language') || 'pt';
+    }
+
+    function formatDate(dateStr, lang) {
+      if (!dateStr) return '';
+      const date = new Date(dateStr);
+      const options = { day: '2-digit', month: 'long', year: 'numeric' };
+      const locales = { pt: 'pt-BR', en: 'en-US', es: 'es-ES' };
+      return date.toLocaleDateString(locales[lang] || 'pt-BR', options);
+    }
+
+    function getCategoryLabel(categoria, lang) {
+      const labels = {
+        artigo: { pt: 'Artigo', en: 'Article', es: 'Articulo' },
+        jurisprudencia: { pt: 'Jurisprudencia', en: 'Jurisprudence', es: 'Jurisprudencia' },
+        alerta: { pt: 'Alerta de Golpe', en: 'Scam Alert', es: 'Alerta de Estafa' },
+        noticia: { pt: 'Noticia', en: 'News', es: 'Noticia' }
+      };
+      return labels[categoria]?.[lang] || labels[categoria]?.pt || categoria;
+    }
+
+    async function loadInsight() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get('slug');
+      const lang = getCurrentLang();
+      const mainContent = document.getElementById('main-content');
+      const loading = document.getElementById('loading');
+
+      if (!slug) {
+        mainContent.innerHTML = `
+          <div class="error">
+            <h2>Insight nao encontrado</h2>
+            <p>O link que voce acessou parece estar incorreto.</p>
+            <p><a href="insights.html">Voltar para Insights</a></p>
+          </div>
+        `;
+        return;
+      }
+
+      try {
+        const response = await fetch(`${INSIGHTS_API_URL}/api/public/insights/${slug}?lang=${lang}`);
+
+        if (!response.ok) {
+          throw new Error('Insight nao encontrado');
+        }
+
+        const data = await response.json();
+        const insight = data.insight;
+
+        // Update page title
+        document.title = `${insight.titulo} | Vaucher e Alvares`;
+
+        // Update meta description
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+          metaDesc.setAttribute('content', insight.resumo);
+        }
+
+        // Render content
+        mainContent.innerHTML = `
+          <article>
+            <header class="article-header">
+              <span class="article-category ${insight.categoria}">${getCategoryLabel(insight.categoria, lang)}</span>
+              <h1 class="article-title">${insight.titulo}</h1>
+              <div class="article-meta">
+                <span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  ${formatDate(insight.data_publicacao, lang)}
+                </span>
+                ${insight.autor_nome ? `
+                <span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  ${insight.autor_nome}
+                </span>
+                ` : ''}
+              </div>
+            </header>
+
+            ${insight.imagem_url ? `
+              <img src="${INSIGHTS_API_URL}${insight.imagem_url}" alt="${insight.titulo}" class="article-image">
+            ` : ''}
+
+            <div class="article-content">
+              ${insight.conteudo}
+            </div>
+
+            ${insight.tags && insight.tags.length > 0 ? `
+              <div class="article-tags">
+                ${insight.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+              </div>
+            ` : ''}
+
+            ${insight.fonte || insight.fonte_url ? `
+              <div class="article-source">
+                <p>
+                  <strong>Fonte:</strong>
+                  ${insight.fonte_url ? `<a href="${insight.fonte_url}" target="_blank" rel="noopener">${insight.fonte || insight.fonte_url}</a>` : insight.fonte}
+                </p>
+              </div>
+            ` : ''}
+          </article>
+        `;
+
+      } catch (error) {
+        console.error('Erro ao carregar insight:', error);
+        mainContent.innerHTML = `
+          <div class="error">
+            <h2>Ops! Algo deu errado</h2>
+            <p>Nao foi possivel carregar este conteudo. Tente novamente mais tarde.</p>
+            <p><a href="insights.html">Voltar para Insights</a></p>
+          </div>
+        `;
+      }
+    }
+
+    // Load on page ready
+    document.addEventListener('DOMContentLoaded', loadInsight);
+
+    // Reload when language changes
+    window.addEventListener('languageChanged', loadInsight);
+  </script>
+</body>
+</html>

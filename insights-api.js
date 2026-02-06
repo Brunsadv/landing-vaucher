@@ -64,7 +64,8 @@ async function loadFeaturedInsights() {
     const response = await fetch(`${INSIGHTS_API_URL}/api/public/insights/destaque?lang=${lang}&limite=3`);
 
     if (!response.ok) {
-      console.log('API não disponível, usando conteúdo estático');
+      console.log('API não disponível para destaques');
+      // Manter conteúdo estático se API falhar
       return;
     }
 
@@ -184,7 +185,16 @@ async function loadInsightsByCategory(categoria = '', page = 1) {
 
     const response = await fetch(url);
 
-    if (!response.ok) return;
+    if (!response.ok) {
+      if (page === 1) {
+        container.innerHTML = `
+          <div class="no-results" style="text-align: center; padding: 2rem; color: #666;">
+            <p>${lang === 'pt' ? 'Não foi possível carregar os insights. Tente novamente mais tarde.' : lang === 'en' ? 'Could not load insights. Please try again later.' : 'No se pudieron cargar los insights. Inténtelo de nuevo más tarde.'}</p>
+          </div>
+        `;
+      }
+      return;
+    }
 
     const data = await response.json();
 
