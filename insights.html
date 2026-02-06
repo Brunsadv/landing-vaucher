@@ -452,7 +452,7 @@
 
     .article-image {
       width: 100%;
-      height: 200px;
+      aspect-ratio: 16/9;
       background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--border) 100%);
       display: flex;
       align-items: center;
@@ -464,7 +464,8 @@
     .article-image img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      background: var(--bg-subtle);
     }
 
     .article-image-placeholder {
