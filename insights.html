@@ -453,19 +453,20 @@
     .article-image {
       width: 100%;
       aspect-ratio: 16/9;
-      background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--border) 100%);
+      background: var(--bg-subtle);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       overflow: hidden;
+      border-radius: 12px 12px 0 0;
     }
 
     .article-image img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      background: var(--bg-subtle);
+      object-fit: cover;
+      object-position: center;
     }
 
     .article-image-placeholder {
@@ -484,7 +485,8 @@
       height: 36px;
     }
 
-    .article-category {
+    .article-category,
+    .article-badge {
       position: absolute;
       top: 1rem;
       left: 1rem;
@@ -496,14 +498,25 @@
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      z-index: 5;
     }
 
-    .article-category.jurisprudencia {
+    .article-category.jurisprudencia,
+    .article-badge.purple {
+      background: #9333ea;
+    }
+
+    .article-category.alerta,
+    .article-badge.amber {
+      background: var(--warning);
+    }
+
+    .article-badge.blue {
       background: var(--info);
     }
 
-    .article-category.alerta {
-      background: var(--warning);
+    .article-badge.green {
+      background: #22c55e;
     }
 
     .article-content {
@@ -556,25 +569,41 @@
     }
 
     /* Featured Article */
-    .featured-article {
+    .featured-article,
+    .article-card.featured {
       grid-column: 1 / -1;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
+      flex-direction: row;
     }
 
-    .featured-article .article-image {
+    .featured-article .article-image,
+    .article-card.featured .article-image {
       height: 100%;
       min-height: 350px;
       border-radius: 20px 0 0 20px;
+      aspect-ratio: auto;
+      background: var(--bg-subtle);
     }
 
-    .featured-article .article-content {
+    .featured-article .article-image img,
+    .article-card.featured .article-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: var(--bg-subtle);
+    }
+
+    .featured-article .article-content,
+    .article-card.featured .article-content {
       padding: 2.5rem;
       justify-content: center;
     }
 
-    .featured-article .article-title {
+    .featured-article .article-title,
+    .article-card.featured .article-title {
       font-size: 1.75rem;
     }
 
@@ -594,95 +623,6 @@
     .featured-badge svg {
       width: 14px;
       height: 14px;
-    }
-
-    /* Jurisprudence Section */
-    .jurisprudence-section {
-      padding: 6rem 2rem;
-      background: var(--bg-subtle);
-      position: relative;
-      z-index: 1;
-    }
-
-    .jurisprudence-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .jurisprudence-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .jurisprudence-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      color: var(--text);
-    }
-
-    .jurisprudence-card:hover {
-      border-color: var(--info);
-      box-shadow: 0 10px 30px var(--shadow);
-    }
-
-    .jurisprudence-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .jurisprudence-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--info-bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--info);
-      flex-shrink: 0;
-    }
-
-    .jurisprudence-icon svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .jurisprudence-meta {
-      flex: 1;
-    }
-
-    .jurisprudence-court {
-      font-size: 0.8rem;
-      color: var(--info);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .jurisprudence-number {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .jurisprudence-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.15rem;
-      font-weight: 500;
-      line-height: 1.4;
-      margin-bottom: 0.75rem;
-    }
-
-    .jurisprudence-excerpt {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.6;
     }
 
     /* Newsletter Section */
@@ -862,11 +802,13 @@
         grid-template-columns: 1fr;
       }
 
-      .featured-article {
+      .featured-article,
+      .article-card.featured {
         grid-template-columns: 1fr;
       }
 
-      .featured-article .article-image {
+      .featured-article .article-image,
+      .article-card.featured .article-image {
         min-height: 200px;
         border-radius: 20px 20px 0 0;
       }
@@ -875,14 +817,6 @@
         flex-direction: column;
         gap: 1rem;
         align-items: flex-start;
-      }
-
-      .jurisprudence-section {
-        padding: 4rem 1.5rem;
-      }
-
-      .jurisprudence-grid {
-        grid-template-columns: 1fr;
       }
 
       .newsletter-section {
@@ -1139,99 +1073,6 @@
     </div>
   </section>
 
-  <!-- Jurisprudence Section -->
-  <section class="jurisprudence-section" id="jurisprudencia">
-    <div class="jurisprudence-container">
-      <div class="section-header animate-on-scroll">
-        <h2 class="section-title" data-i18n="insights.recentJurisprudence">Jurisprudência Recente</h2>
-        <a href="#" class="section-link">
-          <span data-i18n="insights.viewAll">Ver todos</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
-
-      <div class="jurisprudence-grid">
-        <a href="#" class="jurisprudence-card animate-on-scroll">
-          <div class="jurisprudence-header">
-            <div class="jurisprudence-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                <line x1="9" y1="9" x2="9.01" y2="9"/>
-                <line x1="15" y1="9" x2="15.01" y2="9"/>
-              </svg>
-            </div>
-            <div class="jurisprudence-meta">
-              <span class="jurisprudence-court">STF</span>
-              <span class="jurisprudence-number">RE 1.234.567/MT</span>
-            </div>
-          </div>
-          <h3 class="jurisprudence-title">Servidor público tem direito a incorporação de gratificação após 5 anos</h3>
-          <p class="jurisprudence-excerpt">Decisão reconhece o direito à incorporação de gratificação de função recebida por mais de 5 anos consecutivos.</p>
-        </a>
-
-        <a href="#" class="jurisprudence-card animate-on-scroll">
-          <div class="jurisprudence-header">
-            <div class="jurisprudence-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                <line x1="9" y1="9" x2="9.01" y2="9"/>
-                <line x1="15" y1="9" x2="15.01" y2="9"/>
-              </svg>
-            </div>
-            <div class="jurisprudence-meta">
-              <span class="jurisprudence-court">TST</span>
-              <span class="jurisprudence-number">RR 789.012/MT</span>
-            </div>
-          </div>
-          <h3 class="jurisprudence-title">Horas extras de bancário devem considerar tempo de deslocamento</h3>
-          <p class="jurisprudence-excerpt">Tribunal decide que tempo de deslocamento em veículo da empresa integra a jornada de trabalho.</p>
-        </a>
-
-        <a href="#" class="jurisprudence-card animate-on-scroll">
-          <div class="jurisprudence-header">
-            <div class="jurisprudence-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                <line x1="9" y1="9" x2="9.01" y2="9"/>
-                <line x1="15" y1="9" x2="15.01" y2="9"/>
-              </svg>
-            </div>
-            <div class="jurisprudence-meta">
-              <span class="jurisprudence-court">TRT-23</span>
-              <span class="jurisprudence-number">ROT 456.789/MT</span>
-            </div>
-          </div>
-          <h3 class="jurisprudence-title">Sindicato pode atuar como substituto processual em ação coletiva</h3>
-          <p class="jurisprudence-excerpt">Reconhecida a legitimidade do sindicato para defender direitos individuais homogêneos dos trabalhadores.</p>
-        </a>
-
-        <a href="#" class="jurisprudence-card animate-on-scroll">
-          <div class="jurisprudence-header">
-            <div class="jurisprudence-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                <line x1="9" y1="9" x2="9.01" y2="9"/>
-                <line x1="15" y1="9" x2="15.01" y2="9"/>
-              </svg>
-            </div>
-            <div class="jurisprudence-meta">
-              <span class="jurisprudence-court">STJ</span>
-              <span class="jurisprudence-number">REsp 2.345.678/MT</span>
-            </div>
-          </div>
-          <h3 class="jurisprudence-title">Prescrição de ação contra a Fazenda Pública é de 5 anos</h3>
-          <p class="jurisprudence-excerpt">Confirmado o prazo prescricional quinquenal para ações de cobrança contra entes públicos.</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- All Insights Section (Dynamic) -->
   <section class="articles-section" id="todos-insights">
     <div class="articles-container">
@@ -1343,11 +1184,56 @@
     });
 
     // Newsletter form
-    document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+    document.querySelector('.newsletter-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = e.target.querySelector('input').value;
-      alert('Obrigado por se inscrever! Você receberá nossos conteúdos em: ' + email);
-      e.target.reset();
+      const form = e.target;
+      const email = form.querySelector('input').value;
+      const btn = form.querySelector('button');
+      const originalText = btn.textContent;
+
+      // Mostrar loading
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+
+      try {
+        const response = await fetch('https://vaucher-sistema-production.up.railway.app/api/public/newsletter/inscrever', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email,
+            idioma: localStorage.getItem('language') || 'pt'
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.sucesso) {
+          // Sucesso
+          btn.textContent = 'Inscrito!';
+          btn.style.background = '#22c55e';
+          form.reset();
+
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 3000);
+        } else {
+          throw new Error(data.detail || 'Erro ao inscrever');
+        }
+      } catch (error) {
+        console.error('Erro newsletter:', error);
+        btn.textContent = 'Erro!';
+        btn.style.background = '#ef4444';
+
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3000);
+      }
     });
   </script>
 </body>
