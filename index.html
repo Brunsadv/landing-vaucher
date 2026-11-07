@@ -12,7 +12,10 @@
   <meta property="og:description" content="Escritório de advocacia em Cuiabá-MT. Atendimento humanizado e resultados concretos.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:image" content="logo-icon.png">
+  <meta property="og:image" content="https://www.vaucherealvares.com/logo-icon.png">
+  <meta property="og:url" content="https://www.vaucherealvares.com/">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://www.vaucherealvares.com/">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="logo-icon.png">
@@ -784,6 +787,318 @@
       font-size: 0.8rem;
     }
 
+    /* Modal de Consulta de Processo */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--bg);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+      animation: modalIn 0.3s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .modal-close:hover {
+      background: rgba(139, 21, 56, 0.05);
+      color: var(--primary);
+    }
+
+    .modal-close svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      max-height: calc(90vh - 80px);
+    }
+
+    .processo-search-box {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .processo-input {
+      flex: 1;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--bg);
+      transition: border-color 0.2s ease;
+    }
+
+    .processo-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .processo-input::placeholder {
+      color: var(--text-subtle);
+    }
+
+    .processo-search-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .processo-search-btn:hover {
+      background: var(--primary-light);
+    }
+
+    .processo-search-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .processo-search-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .processo-hint {
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      margin-bottom: 1.5rem;
+    }
+
+    .processo-loading {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+    }
+
+    .processo-loading.active {
+      display: block;
+    }
+
+    .processo-loading svg {
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      color: var(--primary);
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .processo-error {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 12px;
+      padding: 1rem;
+      color: #dc2626;
+      font-size: 0.9rem;
+    }
+
+    .processo-error.active {
+      display: block;
+    }
+
+    .processo-result {
+      display: none;
+    }
+
+    .processo-result.active {
+      display: block;
+    }
+
+    .processo-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .processo-numero {
+      font-family: 'DM Sans', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      word-break: break-all;
+    }
+
+    .processo-info {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .processo-info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .processo-info-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .processo-info-value {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .processo-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .processo-status.ativo {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    .processo-status.baixado, .processo-status.arquivado {
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+
+    .processo-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .movimentos-section {
+      margin-top: 1.5rem;
+    }
+
+    .movimentos-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .movimentos-title svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+    }
+
+    .movimentos-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .movimento-item {
+      display: flex;
+      gap: 1rem;
+      padding: 0.75rem;
+      background: var(--bg);
+      border-radius: 10px;
+      border-left: 3px solid var(--primary);
+    }
+
+    .movimento-data {
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      min-width: 80px;
+    }
+
+    .movimento-texto {
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .movimento-complemento {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
     /* Mobile Menu */
     .mobile-menu {
       display: none;
@@ -1133,6 +1448,12 @@
 
       <!-- Quick suggestions -->
       <div class="suggestions">
+        <button class="suggestion" data-action="consultar-processo" data-i18n="suggestion.consultProcess" style="background: var(--primary); color: white; border-color: var(--primary);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px; display: inline; vertical-align: middle; margin-right: 4px;">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          Consultar Processo
+        </button>
         <button class="suggestion" data-action="processo" data-i18n="suggestion.process">Acompanhar processo</button>
         <button class="suggestion" data-action="consulta" data-i18n="suggestion.schedule">Agendar consulta</button>
         <button class="suggestion" data-action="whatsapp" data-i18n="suggestion.whatsapp">Falar no WhatsApp</button>
@@ -1297,6 +1618,106 @@
     </div>
   </section>
 
+  <!-- Modal de Consulta de Processo -->
+  <div class="modal-overlay" id="processoModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" data-i18n="modal.title">Consultar Processo</h2>
+        <button class="modal-close" id="modalClose" aria-label="Fechar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="processo-search-box">
+          <input
+            type="text"
+            class="processo-input"
+            id="processoInput"
+            placeholder="Ex: 1001234-56.2024.8.11.0001"
+            data-i18n-placeholder="modal.placeholder"
+          >
+          <button class="processo-search-btn" id="processoSearchBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <span data-i18n="modal.search">Buscar</span>
+          </button>
+        </div>
+        <p class="processo-hint" data-i18n="modal.hint">Digite o número completo do processo (formato CNJ com 20 dígitos)</p>
+
+        <div style="background: #f0f7ff; border: 1px solid #cce0ff; border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.8rem; color: #1a5dad;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; display: inline; vertical-align: middle; margin-right: 6px;">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+          </svg>
+          <span data-i18n="modal.sourceInfo">Dados obtidos diretamente do DataJud (CNJ). A sincronização de novos processos pode levar alguns dias.</span>
+        </div>
+
+        <div class="processo-loading" id="processoLoading">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+          </svg>
+          <p data-i18n="modal.loading">Buscando processo...</p>
+        </div>
+
+        <div class="processo-error" id="processoError">
+          <div style="margin-bottom: 0.75rem;">
+            <strong data-i18n="modal.errorTitle">Processo não encontrado</strong>
+          </div>
+          <p style="margin-bottom: 0.75rem; color: #666;" data-i18n="modal.errorDesc" data-i18n-html="true">
+            O processo informado não foi localizado na base de dados do CNJ (DataJud). Isso pode ocorrer se o processo for muito recente, estiver em sigilo ou ainda não tiver sido sincronizado pelo tribunal.
+          </p>
+          <p style="color: #666;" data-i18n="modal.errorContact" data-i18n-html="true">
+            Em caso de dúvidas, entre em contato com nossa equipe pelo
+            <a href="https://wa.me/556599478584" target="_blank" style="color: var(--primary); text-decoration: underline;">WhatsApp</a>
+            ou telefone <a href="tel:+556530251223" style="color: var(--primary); text-decoration: underline;">(65) 3025-1223</a>.
+          </p>
+        </div>
+
+        <div class="processo-result" id="processoResult">
+          <div class="processo-card">
+            <div class="processo-numero" id="resultNumero"></div>
+            <div class="processo-info">
+              <div class="processo-info-item">
+                <span class="processo-info-label" data-i18n="modal.class">Classe</span>
+                <span class="processo-info-value" id="resultClasse"></span>
+              </div>
+              <div class="processo-info-item">
+                <span class="processo-info-label" data-i18n="modal.court">Órgão Julgador</span>
+                <span class="processo-info-value" id="resultOrgao"></span>
+              </div>
+              <div class="processo-info-item">
+                <span class="processo-info-label" data-i18n="modal.filingDate">Data de Ajuizamento</span>
+                <span class="processo-info-value" id="resultData"></span>
+              </div>
+              <div class="processo-info-item">
+                <span class="processo-info-label" data-i18n="modal.status">Situação</span>
+                <span class="processo-info-value" id="resultSituacao"></span>
+              </div>
+              <div class="processo-info-item">
+                <span class="processo-info-label" data-i18n="modal.subjects">Assuntos</span>
+                <span class="processo-info-value" id="resultAssuntos"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="movimentos-section">
+            <h3 class="movimentos-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+              <span data-i18n="modal.movements">Últimas Movimentações</span>
+            </h3>
+            <div class="movimentos-list" id="resultMovimentos"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
@@ -1347,6 +1768,7 @@
         'hero.learnMore': 'Saiba mais',
 
         // Search Results
+        'search.consultProcess': 'Consultar este processo',
         'search.accessProcess': 'Acessar meu processo',
         'search.accessProcessDesc': 'Portal do cliente - acompanhe andamentos',
         'search.talkLawyer': 'Falar com advogado',
@@ -1356,10 +1778,30 @@
         'search.callOffice': 'Ligar para o escritório',
 
         // Suggestions
+        'suggestion.consultProcess': 'Consultar Processo',
         'suggestion.process': 'Acompanhar processo',
         'suggestion.schedule': 'Agendar consulta',
         'suggestion.whatsapp': 'Falar no WhatsApp',
         'suggestion.areas': 'Áreas de atuação',
+
+        // Modal Consulta Processo
+        'modal.title': 'Consultar Processo',
+        'modal.placeholder': 'Ex: 1001234-56.2024.8.11.0001',
+        'modal.search': 'Buscar',
+        'modal.hint': 'Digite o número completo do processo (formato CNJ com 20 dígitos)',
+        'modal.loading': 'Buscando processo...',
+        'modal.error': 'Processo não encontrado. Verifique o número e tente novamente.',
+        'modal.errorTitle': 'Processo não encontrado',
+        'modal.errorDesc': 'O processo informado não foi localizado na base de dados do CNJ (DataJud). Isso pode ocorrer se o processo for muito recente, estiver em sigilo ou ainda não tiver sido sincronizado pelo tribunal.',
+        'modal.errorContact': 'Em caso de dúvidas, entre em contato com nossa equipe pelo WhatsApp ou telefone (65) 3025-1223.',
+        'modal.sourceInfo': 'Dados obtidos diretamente do DataJud (CNJ). A sincronização de novos processos pode levar alguns dias.',
+        'modal.class': 'Classe',
+        'modal.court': 'Órgão Julgador',
+        'modal.filingDate': 'Data de Ajuizamento',
+        'modal.status': 'Situação',
+        'modal.subjects': 'Assuntos',
+        'modal.movements': 'Últimas Movimentações',
+        'modal.noMovements': 'Nenhuma movimentação registrada',
 
         // Features Section
         'features.label': 'Por que nos escolher',
@@ -1415,6 +1857,7 @@
         'hero.learnMore': 'Learn more',
 
         // Search Results
+        'search.consultProcess': 'Search this case',
         'search.accessProcess': 'Access my case',
         'search.accessProcessDesc': 'Client portal - track progress',
         'search.talkLawyer': 'Talk to a lawyer',
@@ -1424,10 +1867,30 @@
         'search.callOffice': 'Call the office',
 
         // Suggestions
+        'suggestion.consultProcess': 'Search Case',
         'suggestion.process': 'Track case',
         'suggestion.schedule': 'Schedule consultation',
         'suggestion.whatsapp': 'Chat on WhatsApp',
         'suggestion.areas': 'Practice areas',
+
+        // Modal Consulta Processo
+        'modal.title': 'Search Case',
+        'modal.placeholder': 'Ex: 1001234-56.2024.8.11.0001',
+        'modal.search': 'Search',
+        'modal.hint': 'Enter the full case number (CNJ format with 20 digits)',
+        'modal.loading': 'Searching case...',
+        'modal.error': 'Case not found. Please check the number and try again.',
+        'modal.errorTitle': 'Case not found',
+        'modal.errorDesc': 'The case was not found in the CNJ (DataJud) database. This may occur if the case is very recent, under seal, or has not yet been synchronized by the court.',
+        'modal.errorContact': 'If you have questions, please contact our team via WhatsApp or phone (65) 3025-1223.',
+        'modal.sourceInfo': 'Data obtained directly from DataJud (CNJ). Synchronization of new cases may take a few days.',
+        'modal.class': 'Class',
+        'modal.court': 'Court',
+        'modal.filingDate': 'Filing Date',
+        'modal.status': 'Status',
+        'modal.subjects': 'Subjects',
+        'modal.movements': 'Recent Movements',
+        'modal.noMovements': 'No movements recorded',
 
         // Features Section
         'features.label': 'Why choose us',
@@ -1483,6 +1946,7 @@
         'hero.learnMore': 'Más información',
 
         // Search Results
+        'search.consultProcess': 'Consultar este caso',
         'search.accessProcess': 'Acceder a mi caso',
         'search.accessProcessDesc': 'Portal del cliente - seguimiento de avances',
         'search.talkLawyer': 'Hablar con un abogado',
@@ -1492,10 +1956,30 @@
         'search.callOffice': 'Llamar a la oficina',
 
         // Suggestions
+        'suggestion.consultProcess': 'Consultar Caso',
         'suggestion.process': 'Seguir caso',
         'suggestion.schedule': 'Agendar consulta',
         'suggestion.whatsapp': 'Hablar por WhatsApp',
         'suggestion.areas': 'Áreas de práctica',
+
+        // Modal Consulta Processo
+        'modal.title': 'Consultar Caso',
+        'modal.placeholder': 'Ej: 1001234-56.2024.8.11.0001',
+        'modal.search': 'Buscar',
+        'modal.hint': 'Ingrese el número completo del caso (formato CNJ con 20 dígitos)',
+        'modal.loading': 'Buscando caso...',
+        'modal.error': 'Caso no encontrado. Verifique el número e intente nuevamente.',
+        'modal.errorTitle': 'Caso no encontrado',
+        'modal.errorDesc': 'El caso no fue encontrado en la base de datos del CNJ (DataJud). Esto puede ocurrir si el caso es muy reciente, está bajo secreto o aún no ha sido sincronizado por el tribunal.',
+        'modal.errorContact': 'En caso de dudas, contacte a nuestro equipo por WhatsApp o teléfono (65) 3025-1223.',
+        'modal.sourceInfo': 'Datos obtenidos directamente de DataJud (CNJ). La sincronización de nuevos casos puede tardar algunos días.',
+        'modal.class': 'Clase',
+        'modal.court': 'Órgano Juzgador',
+        'modal.filingDate': 'Fecha de Presentación',
+        'modal.status': 'Situación',
+        'modal.subjects': 'Temas',
+        'modal.movements': 'Últimos Movimientos',
+        'modal.noMovements': 'Sin movimientos registrados',
 
         // Features Section
         'features.label': 'Por qué elegirnos',
@@ -1725,6 +2209,231 @@
         nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
       } else {
         nav.style.boxShadow = 'none';
+      }
+    });
+
+    // ============================================
+    // CONSULTA DE PROCESSO - API DATAJUD CNJ (via Vercel Serverless)
+    // ============================================
+    const API_CONSULTA_PROCESSO = '/api/consulta-processo';
+
+    // Elementos do modal
+    const processoModal = document.getElementById('processoModal');
+    const modalClose = document.getElementById('modalClose');
+    const processoInput = document.getElementById('processoInput');
+    const processoSearchBtn = document.getElementById('processoSearchBtn');
+    const processoLoading = document.getElementById('processoLoading');
+    const processoError = document.getElementById('processoError');
+    const processoResult = document.getElementById('processoResult');
+
+    // Abrir modal
+    function openProcessoModal() {
+      processoModal.classList.add('active');
+      processoInput.focus();
+      // Reset states
+      processoLoading.classList.remove('active');
+      processoError.classList.remove('active');
+      processoResult.classList.remove('active');
+    }
+
+    // Fechar modal
+    function closeProcessoModal() {
+      processoModal.classList.remove('active');
+      processoInput.value = '';
+    }
+
+    // Event listeners para abrir/fechar modal
+    modalClose.addEventListener('click', closeProcessoModal);
+    processoModal.addEventListener('click', (e) => {
+      if (e.target === processoModal) closeProcessoModal();
+    });
+
+    // Fechar com ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && processoModal.classList.contains('active')) {
+        closeProcessoModal();
+      }
+    });
+
+    // Adicionar ação ao botão "Consultar Processo" nas sugestões
+    document.querySelector('[data-action="consultar-processo"]')?.addEventListener('click', openProcessoModal);
+
+    // Função para formatar data
+    function formatDate(dateStr) {
+      if (!dateStr) return '-';
+      // DataJud pode retornar formato "20210721161518" ou "2021-07-21"
+      let date;
+      if (/^\d{14}$/.test(dateStr)) {
+        // Formato: YYYYMMDDHHmmss
+        const year = dateStr.substring(0, 4);
+        const month = dateStr.substring(4, 6);
+        const day = dateStr.substring(6, 8);
+        date = new Date(`${year}-${month}-${day}`);
+      } else {
+        date = new Date(dateStr);
+      }
+      return isNaN(date.getTime()) ? dateStr : date.toLocaleDateString('pt-BR');
+    }
+
+    // Função para formatar data e hora
+    function formatDateTime(dateStr) {
+      if (!dateStr) return '-';
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    // Função para buscar processo via API Serverless (Vercel)
+    async function buscarProcesso(numeroProcesso) {
+      // Limpar número (remover espaços)
+      const numero = numeroProcesso.trim();
+
+      // Mostrar loading
+      processoLoading.classList.add('active');
+      processoError.classList.remove('active');
+      processoResult.classList.remove('active');
+      processoSearchBtn.disabled = true;
+
+      try {
+        const response = await fetch(API_CONSULTA_PROCESSO, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ numeroProcesso: numero })
+        });
+
+        if (response.status === 404) {
+          processoError.classList.add('active');
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error('Erro na API');
+        }
+
+        const processo = await response.json();
+        exibirResultado(processo);
+
+      } catch (error) {
+        console.error('Erro ao buscar processo:', error);
+        processoError.classList.add('active');
+      } finally {
+        processoLoading.classList.remove('active');
+        processoSearchBtn.disabled = false;
+      }
+    }
+
+    // Função para exibir resultado
+    function escHtml(v) {
+      return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    function exibirResultado(processo) {
+      // Número do processo
+      document.getElementById('resultNumero').textContent = processo.numeroProcesso || '-';
+
+      // Classe
+      document.getElementById('resultClasse').textContent =
+        processo.classe ? processo.classe.nome : '-';
+
+      // Órgão Julgador
+      document.getElementById('resultOrgao').textContent =
+        processo.orgaoJulgador ? processo.orgaoJulgador.nome : '-';
+
+      // Data de Ajuizamento
+      document.getElementById('resultData').textContent = formatDate(processo.dataAjuizamento);
+
+      // Situação (inferir do grau se não houver)
+      const situacaoEl = document.getElementById('resultSituacao');
+      let situacao = processo.situacao || (processo.grau === 'G1' ? 'ativo' : 'em tramitação');
+      situacaoEl.innerHTML = `
+        <span class="processo-status ${escHtml(situacao.toLowerCase().replace(/\s/g, '-'))}">
+          <span class="processo-status-dot"></span>
+          ${escHtml(situacao.charAt(0).toUpperCase() + situacao.slice(1))}
+        </span>
+      `;
+
+      // Assuntos
+      const assuntos = processo.assuntos || [];
+      document.getElementById('resultAssuntos').textContent =
+        assuntos.length > 0
+          ? assuntos.map(a => a.nome).join(', ')
+          : '-';
+
+      // Movimentações (últimas 5)
+      const movimentosEl = document.getElementById('resultMovimentos');
+      const movimentos = processo.movimentos || [];
+
+      if (movimentos.length > 0) {
+        // Ordenar por data (mais recente primeiro) e pegar últimas 5
+        const ultimosMovimentos = movimentos
+          .sort((a, b) => new Date(b.dataHora) - new Date(a.dataHora))
+          .slice(0, 5);
+
+        movimentosEl.innerHTML = ultimosMovimentos.map(mov => `
+          <div class="movimento-item">
+            <div class="movimento-data">${formatDateTime(mov.dataHora)}</div>
+            <div>
+              <div class="movimento-texto">${escHtml(mov.nome || '-')}</div>
+              ${mov.complemento ? `<div class="movimento-complemento">${escHtml(mov.complemento)}</div>` : ''}
+            </div>
+          </div>
+        `).join('');
+      } else {
+        const t = translations[currentLang];
+        movimentosEl.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9rem;">${t['modal.noMovements'] || 'Nenhuma movimentação registrada'}</p>`;
+      }
+
+      processoResult.classList.add('active');
+    }
+
+    // Event listeners para busca
+    processoSearchBtn.addEventListener('click', () => {
+      const numero = processoInput.value.trim();
+      if (numero) {
+        buscarProcesso(numero);
+      }
+    });
+
+    processoInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const numero = processoInput.value.trim();
+        if (numero) {
+          buscarProcesso(numero);
+        }
+      }
+    });
+
+    // Detectar número de processo na caixa de busca principal
+    const processoPattern = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
+
+    searchInput.addEventListener('input', () => {
+      const value = searchInput.value.trim();
+      if (processoPattern.test(value)) {
+        // É um número de processo válido - mostrar opção de consultar
+        searchResults.innerHTML = `
+          <div class="result-item" id="consultarProcessoResult" style="cursor: pointer;">
+            <div class="result-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+            </div>
+            <div class="result-content">
+              <div class="result-title" data-i18n="search.consultProcess">Consultar este processo</div>
+              <div class="result-desc">${value}</div>
+            </div>
+          </div>
+        `;
+        searchResults.classList.add('active');
+
+        document.getElementById('consultarProcessoResult').addEventListener('click', () => {
+          processoInput.value = value;
+          searchInput.value = '';
+          searchResults.classList.remove('active');
+          openProcessoModal();
+          buscarProcesso(value);
+        });
       }
     });
   </script>

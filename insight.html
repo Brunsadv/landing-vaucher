@@ -3,8 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Insight | Vaucher e Alvares Advocacia</title>
-  <meta name="description" content="Artigo juridico do escritorio Vaucher e Alvares.">
+  <title>Insight | Vaucher e Álvares Advocacia</title>
+  <meta name="description" content="Artigo jurídico do escritório Vaucher e Álvares.">
+  <meta property="og:title" content="Insight | Vaucher e Álvares Advocacia">
+  <meta property="og:description" content="Artigo jurídico do escritório Vaucher e Álvares.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="https://www.vaucherealvares.com/logo-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://www.vaucherealvares.com/insights.html">
   <meta name="theme-color" content="#ffffff">
 
   <!-- Favicon -->
@@ -265,6 +272,30 @@
       color: var(--text-muted);
     }
 
+    /* Imagens dentro do conteúdo do artigo */
+    .article-content img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5rem auto;
+      border-radius: 12px;
+    }
+
+    /* Evita que imagens ultrapassem o container */
+    .article-content * {
+      max-width: 100%;
+    }
+
+    /* Links dentro do conteúdo */
+    .article-content a {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    .article-content a:hover {
+      color: var(--primary-dark);
+    }
+
     /* Tags */
     .article-tags {
       display: flex;
@@ -375,6 +406,7 @@
   </footer>
 
   <!-- i18n Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.7/purify.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="i18n.js"></script>
 
   <script>
@@ -400,6 +432,26 @@
         noticia: { pt: 'Noticia', en: 'News', es: 'Noticia' }
       };
       return labels[categoria]?.[lang] || labels[categoria]?.pt || categoria;
+    }
+
+    // Escapa texto da API antes de ir para innerHTML
+    function esc(v) {
+      return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+    // HTML do artigo (vem do editor do painel): sanitizado com DOMPurify; fallback remove scripts/handlers
+    function sanitizeHtml(html) {
+      const raw = String(html || '');
+      if (window.DOMPurify) {
+        return DOMPurify.sanitize(raw, { USE_PROFILES: { html: true }, ADD_ATTR: ['target'] });
+      }
+      return raw
+        .replace(/<\s*(script|iframe|object|embed|style)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, '')
+        .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, '')
+        .replace(/(href|src)\s*=\s*(["']?)\s*javascript:[^"'>\s]*/gi, '$1=$2#');
+    }
+    function safeHttpUrl(u) {
+      const s = String(u || '').trim();
+      return /^https?:\/\//i.test(s) ? esc(s) : '';
     }
 
     async function loadInsight() {
@@ -431,7 +483,13 @@
         const insight = data.insight;
 
         // Update page title
-        document.title = `${insight.titulo} | Vaucher e Alvares`;
+        document.title = `${insight.titulo} | Vaucher e Álvares`;
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute('content', insight.titulo);
+        const ogDesc = document.querySelector('meta[property="og:description"]');
+        if (ogDesc) ogDesc.setAttribute('content', insight.resumo || '');
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) canonical.setAttribute('href', `https://www.vaucherealvares.com/insight.html?slug=${encodeURIComponent(slug)}`);
 
         // Update meta description
         const metaDesc = document.querySelector('meta[name="description"]');
@@ -443,8 +501,8 @@
         mainContent.innerHTML = `
           <article>
             <header class="article-header">
-              <span class="article-category ${insight.categoria}">${getCategoryLabel(insight.categoria, lang)}</span>
-              <h1 class="article-title">${insight.titulo}</h1>
+              <span class="article-category ${esc(insight.categoria)}">${esc(getCategoryLabel(insight.categoria, lang))}</span>
+              <h1 class="article-title">${esc(insight.titulo)}</h1>
               <div class="article-meta">
                 <span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -461,23 +519,23 @@
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                     <circle cx="12" cy="7" r="4"/>
                   </svg>
-                  ${insight.autor_nome}
+                  ${esc(insight.autor_nome)}
                 </span>
                 ` : ''}
               </div>
             </header>
 
             ${insight.imagem_url ? `
-              <img src="${INSIGHTS_API_URL}${insight.imagem_url}" alt="${insight.titulo}" class="article-image">
+              <img src="${String(insight.imagem_url || '').startsWith('/') ? INSIGHTS_API_URL + esc(insight.imagem_url) : ''}" alt="${esc(insight.titulo)}" class="article-image">
             ` : ''}
 
             <div class="article-content">
-              ${insight.conteudo}
+              ${sanitizeHtml(insight.conteudo)}
             </div>
 
             ${insight.tags && insight.tags.length > 0 ? `
               <div class="article-tags">
-                ${insight.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                ${insight.tags.map(tag => `<span class="tag">${esc(tag)}</span>`).join('')}
               </div>
             ` : ''}
 
@@ -485,7 +543,7 @@
               <div class="article-source">
                 <p>
                   <strong>Fonte:</strong>
-                  ${insight.fonte_url ? `<a href="${insight.fonte_url}" target="_blank" rel="noopener">${insight.fonte || insight.fonte_url}</a>` : insight.fonte}
+                  ${safeHttpUrl(insight.fonte_url) ? `<a href="${safeHttpUrl(insight.fonte_url)}" target="_blank" rel="noopener">${esc(insight.fonte || insight.fonte_url)}</a>` : esc(insight.fonte)}
                 </p>
               </div>
             ` : ''}
@@ -497,7 +555,7 @@
         mainContent.innerHTML = `
           <div class="error">
             <h2>Ops! Algo deu errado</h2>
-            <p>Nao foi possivel carregar este conteudo. Tente novamente mais tarde.</p>
+            <p>Não foi possível carregar este conteúdo. Tente novamente mais tarde.</p>
             <p><a href="insights.html">Voltar para Insights</a></p>
           </div>
         `;

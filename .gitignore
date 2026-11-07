@@ -17,3 +17,6 @@ contato_new.html
 # Sistema
 .DS_Store
 Thumbs.db
+
+.vercel
+.env*.local

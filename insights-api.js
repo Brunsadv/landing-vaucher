@@ -5,6 +5,17 @@
 
 const INSIGHTS_API_URL = 'https://vaucher-sistema-production.up.railway.app';
 
+// Escapa texto vindo da API antes de ir para innerHTML (evita XSS via CMS)
+function esc(v) {
+  return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+// Caminho de imagem servido pela API (só caminhos relativos do backend)
+function imgUrl(path) {
+  const p = String(path || '');
+  return p.startsWith('/') ? INSIGHTS_API_URL + esc(p) : '';
+}
+
 // Obter idioma atual
 function getCurrentLang() {
   return localStorage.getItem('language') || 'pt';
@@ -61,7 +72,7 @@ async function loadFeaturedInsights() {
   if (!container) return;
 
   try {
-    const response = await fetch(`${INSIGHTS_API_URL}/api/public/insights/destaque?lang=${lang}&limite=3`);
+    const response = await fetch(`${INSIGHTS_API_URL}/api/public/insights/destaque?lang=${lang}&limite=4`);
 
     if (!response.ok) {
       console.log('API não disponível para destaques');
@@ -84,19 +95,19 @@ async function loadFeaturedInsights() {
       const color = getCategoryColor(insight.categoria);
 
       const articleHTML = `
-        <article class="article-card ${isMain ? 'featured' : ''} animate-on-scroll" data-category="${insight.categoria}">
+        <article class="article-card ${isMain ? 'featured' : ''} animate-on-scroll" data-category="${esc(insight.categoria)}">
           <div class="article-image">
             ${insight.imagem_url
-              ? `<img src="${INSIGHTS_API_URL}${insight.imagem_url}" alt="${insight.titulo}" loading="lazy">`
+              ? `<img src="${imgUrl(insight.imagem_url)}" alt="${esc(insight.titulo)}" loading="lazy">`
               : `<div class="article-image-placeholder">${getCategoryIcon(insight.categoria)}</div>`
             }
             <span class="article-badge ${color}">${getCategoryLabel(insight.categoria, lang)}</span>
           </div>
           <div class="article-content">
             <span class="article-date">${formatDate(insight.data_publicacao, lang)}</span>
-            <h3 class="article-title">${insight.titulo}</h3>
-            <p class="article-excerpt">${insight.resumo}</p>
-            <a href="insight.html?slug=${insight.slug}" class="article-link">
+            <h3 class="article-title">${esc(insight.titulo)}</h3>
+            <p class="article-excerpt">${esc(insight.resumo)}</p>
+            <a href="insight.html?slug=${encodeURIComponent(insight.slug || '')}" class="article-link">
               ${lang === 'pt' ? 'Ler artigo completo' : lang === 'en' ? 'Read full article' : 'Leer artículo completo'}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
@@ -146,8 +157,8 @@ async function loadAlerts() {
           </svg>
         </div>
         <div class="alert-content">
-          <h3 class="alert-title">${alerta.titulo}</h3>
-          <p class="alert-text">${alerta.resumo}</p>
+          <h3 class="alert-title">${esc(alerta.titulo)}</h3>
+          <p class="alert-text">${esc(alerta.resumo)}</p>
         </div>
       </div>
     `;
@@ -220,19 +231,19 @@ async function loadInsightsByCategory(categoria = '', page = 1) {
       const color = getCategoryColor(insight.categoria);
 
       const articleHTML = `
-        <article class="article-card animate-on-scroll" data-category="${insight.categoria}">
+        <article class="article-card animate-on-scroll" data-category="${esc(insight.categoria)}">
           <div class="article-image">
             ${insight.imagem_url
-              ? `<img src="${INSIGHTS_API_URL}${insight.imagem_url}" alt="${insight.titulo}" loading="lazy">`
+              ? `<img src="${imgUrl(insight.imagem_url)}" alt="${esc(insight.titulo)}" loading="lazy">`
               : `<div class="article-image-placeholder">${getCategoryIcon(insight.categoria)}</div>`
             }
             <span class="article-badge ${color}">${getCategoryLabel(insight.categoria, lang)}</span>
           </div>
           <div class="article-content">
             <span class="article-date">${formatDate(insight.data_publicacao, lang)}</span>
-            <h3 class="article-title">${insight.titulo}</h3>
-            <p class="article-excerpt">${insight.resumo}</p>
-            <a href="insight.html?slug=${insight.slug}" class="article-link">
+            <h3 class="article-title">${esc(insight.titulo)}</h3>
+            <p class="article-excerpt">${esc(insight.resumo)}</p>
+            <a href="insight.html?slug=${encodeURIComponent(insight.slug || '')}" class="article-link">
               ${lang === 'pt' ? 'Ler mais' : lang === 'en' ? 'Read more' : 'Leer más'}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>

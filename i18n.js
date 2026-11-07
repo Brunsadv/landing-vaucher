@@ -115,7 +115,12 @@ const translations = {
     'footer.copy': '© 2026 Vaucher e Álvares Advogados. Todos os direitos reservados.',
 
     // WhatsApp messages
-    'whatsapp.greeting': 'Olá! Gostaria de agendar uma consulta.'
+    'whatsapp.greeting': 'Olá! Gostaria de agendar uma consulta.',
+    // Chaves adicionadas em 06/11/2026 (modal de consulta / insights)
+    'insight.back': 'Voltar para Insights',
+    'insight.loading': 'Carregando...',
+    'insights.allInsights': 'Todos os Insights',
+    'insights.loadMore': 'Carregar mais'
   },
 
   en: {
@@ -229,7 +234,12 @@ const translations = {
     'footer.copy': '© 2026 Vaucher e Álvares Lawyers. All rights reserved.',
 
     // WhatsApp messages
-    'whatsapp.greeting': 'Hello! I would like to schedule a consultation.'
+    'whatsapp.greeting': 'Hello! I would like to schedule a consultation.',
+    // Chaves adicionadas em 06/11/2026 (modal de consulta / insights)
+    'insight.back': 'Back to Insights',
+    'insight.loading': 'Loading...',
+    'insights.allInsights': 'All Insights',
+    'insights.loadMore': 'Load more'
   },
 
   es: {
@@ -343,7 +353,12 @@ const translations = {
     'footer.copy': '© 2026 Vaucher e Álvares Abogados. Todos los derechos reservados.',
 
     // WhatsApp messages
-    'whatsapp.greeting': '¡Hola! Me gustaría agendar una consulta.'
+    'whatsapp.greeting': '¡Hola! Me gustaría agendar una consulta.',
+    // Chaves adicionadas em 06/11/2026 (modal de consulta / insights)
+    'insight.back': 'Volver a Insights',
+    'insight.loading': 'Cargando...',
+    'insights.allInsights': 'Todos los Insights',
+    'insights.loadMore': 'Cargar más'
   }
 };
 

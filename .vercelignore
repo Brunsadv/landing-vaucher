@@ -1,0 +1,16 @@
+# Nao publicar no site
+landing-vaucher/
+node_modules/
+.git/
+*.docx
+*.ps1
+*.txt
+!robots.txt
+contato_new.html
+contato_temp.txt
+logo-horizontal.png
+Gemini_Generated_Image_*.png
+gemini-2.5-flash-image_*.jpg
+logo-full.jpg
+logo-wide.jpg
+logo-cropped.jpg
