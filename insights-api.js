@@ -107,7 +107,7 @@ async function loadFeaturedInsights() {
             <span class="article-date">${formatDate(insight.data_publicacao, lang)}</span>
             <h3 class="article-title">${esc(insight.titulo)}</h3>
             <p class="article-excerpt">${esc(insight.resumo)}</p>
-            <a href="insight.html?slug=${encodeURIComponent(insight.slug || '')}" class="article-link">
+            <a href="/artigo/${encodeURIComponent(insight.slug || '')}" class="article-link">
               ${lang === 'pt' ? 'Ler artigo completo' : lang === 'en' ? 'Read full article' : 'Leer artículo completo'}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
@@ -243,7 +243,7 @@ async function loadInsightsByCategory(categoria = '', page = 1) {
             <span class="article-date">${formatDate(insight.data_publicacao, lang)}</span>
             <h3 class="article-title">${esc(insight.titulo)}</h3>
             <p class="article-excerpt">${esc(insight.resumo)}</p>
-            <a href="insight.html?slug=${encodeURIComponent(insight.slug || '')}" class="article-link">
+            <a href="/artigo/${encodeURIComponent(insight.slug || '')}" class="article-link">
               ${lang === 'pt' ? 'Ler mais' : lang === 'en' ? 'Read more' : 'Leer más'}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>

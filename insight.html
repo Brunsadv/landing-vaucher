@@ -456,7 +456,8 @@
 
     async function loadInsight() {
       const urlParams = new URLSearchParams(window.location.search);
-      const slug = urlParams.get('slug');
+      // /artigo/<slug> (endereço com prévia para redes sociais) ou o formato antigo insight.html?slug=<slug>
+      const slug = urlParams.get('slug') || decodeURIComponent((window.location.pathname.match(/^\/artigo\/([^/]+)/) || [])[1] || '');
       const lang = getCurrentLang();
       const mainContent = document.getElementById('main-content');
       const loading = document.getElementById('loading');
@@ -489,7 +490,7 @@
         const ogDesc = document.querySelector('meta[property="og:description"]');
         if (ogDesc) ogDesc.setAttribute('content', insight.resumo || '');
         const canonical = document.querySelector('link[rel="canonical"]');
-        if (canonical) canonical.setAttribute('href', `https://www.vaucherealvares.com/insight.html?slug=${encodeURIComponent(slug)}`);
+        if (canonical) canonical.setAttribute('href', `https://www.vaucherealvares.com/artigo/${encodeURIComponent(slug)}`);
 
         // Update meta description
         const metaDesc = document.querySelector('meta[name="description"]');

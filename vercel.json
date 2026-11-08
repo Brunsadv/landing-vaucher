@@ -35,5 +35,16 @@
         }
       ]
     }
-  ]
+  ],
+  "rewrites": [
+    {
+      "source": "/artigo/:slug",
+      "destination": "/api/artigo?slug=:slug"
+    }
+  ],
+  "functions": {
+    "api/artigo.js": {
+      "includeFiles": "insight.html"
+    }
+  }
 }
