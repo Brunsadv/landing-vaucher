@@ -406,7 +406,7 @@
   </footer>
 
   <!-- i18n Script -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.7/purify.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.7/purify.min.js" integrity="sha512-BdRNuI8/lsyxkKQVxK1lVtfZshggfXPAwEP+JAOJEKx6Y8SLfcBSRdaWyXQmMxo+wG180uFqXYGjGRL0mh4/Jw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="i18n.js"></script>
 
   <script>
@@ -474,7 +474,7 @@
       }
 
       try {
-        const response = await fetch(`${INSIGHTS_API_URL}/api/public/insights/${slug}?lang=${lang}`);
+        const response = await fetch(`${INSIGHTS_API_URL}/api/public/insights/${encodeURIComponent(slug)}?lang=${encodeURIComponent(lang)}`);
 
         if (!response.ok) {
           throw new Error('Insight nao encontrado');
